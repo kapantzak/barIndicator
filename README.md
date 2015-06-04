@@ -1,12 +1,10 @@
 # Bar Indicator #
 
-----------
 
 **BarIndicator** is a jQuery plugin that helps you visualize numeric data (percentage or absolute numbers) in to bars.
 
 ## Installation ##
 
-----------
 
 Just include the `bi-style.css` and `jquery-barIndicator.js` files in your project, inside your `<head>` section:
 
@@ -20,7 +18,6 @@ Just include the `bi-style.css` and `jquery-barIndicator.js` files in your proje
 
 ## Dependencies ##
 
-----------
 As **Bar Indicator** is a jQuery plugin, you have to include **jQuery** before calling the plugin. 
 
 [***Optional***] This plugin uses animations, so you have to use the **easing plugin** if you want to pass any of the amazing easing functions to the animations.
@@ -28,9 +25,6 @@ As **Bar Indicator** is a jQuery plugin, you have to include **jQuery** before c
 [***Note***] You might not include easing plugin, but if this is the case, you will not be able to use the `easing` option.
 
 ## Initialize ##
-
-----------
-
 
 All you need is a simple element as a `<div>` or a `<span>`. By default, the plugin will try and get the inner text (assuming that it is a numeric string) and visualize as a percentage in a bar with minimum limit equal to zero and maximum limit equal to 100%. 
 
@@ -47,9 +41,6 @@ In your scripts file (or inside a `<script>` tag):
 That's it! The plugin has initialized using the default options.
 
 ## Options ##
-
-----------
-
 
 There is a number of possible options you can use to customize the appearance and behavior of the plugin. You can store the options object in a variable and pass this variable to the plugin:
 
@@ -369,9 +360,6 @@ The default object holds only one milestone and looks like this:
 
 ## Methods ##
 
-----------
-
-
 You can call specific methods in order to perform specific tasks. Some of the available methods accept arguments too. In order to call a method you can pass it's name in a string:
 
     $('.myElement').barIndicator('methodName', [params]);
@@ -383,9 +371,6 @@ A method call is **chainable**. This means that you can call a plugin's method a
 
 ## Getters ##
 
-----------
-
-
 Getters are methods that return some data and are **not chainable**. You can call a getter and store it's value in a variable:
     
     var dataObj = $('.myElement').barIndicator('getterName');
@@ -395,9 +380,6 @@ Getters are methods that return some data and are **not chainable**. You can cal
 Returns the data object that the plugin has stored to the affected element. 
 
 ## Events ##
-
-----------
-
 
 **Bar Indicator** triggers numerous events in order to notify the user about the actions that take place during the lifecycle of the plugin. You can take advantage of this and trigger some other functions, on each of these events occurrence. For example, if you want to call a function as soon as the bar animation has finished:
 
@@ -446,8 +428,6 @@ Triggers on `loadData` method call start
 Triggers as soon as the 'loadData' method bar animation completes
 
 ## Themes ##
-
-----------
 
 The default theme, used by the plugin is the `bi-default-theme`. To create a custom theme, just copy the part of any built in theme css code, and create your own, replacing the `bi-<themename>-theme` with you own theme name. Then, in order to apply your custom theme, just put it in the options: 
 
