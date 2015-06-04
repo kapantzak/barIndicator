@@ -832,10 +832,4 @@
 		});
 	});
 	
-	//TODO ------------------------------------------------------------------------------------------------------ //
-	// 1) Milestones --> OK
-	// 2) Average (milestones) of groups etc --> TODO option: getAverage
-	// 3) Reanimate bar via new method --> OK
-	// 4) Title (already added data-title) --> OK
-	
 })(jQuery, window, document);
