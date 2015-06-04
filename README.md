@@ -351,7 +351,7 @@ The default object holds only one milestone and looks like this:
 			mlId: false,
 			mlClass: 'bi-middle-mlst',
 			mlDim: 'inherit',
-			mlLabel: 'Average',
+			mlLabel: 'Half',
 			mlLabelVis: 'hover', 
 			mlHoverRange: 15,
 			mlLineWidth: 1
