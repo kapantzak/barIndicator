@@ -150,6 +150,7 @@
 	color:#fff;
 	border-radius:3px;
 	font-size: 0.8em;
+	white-space: nowrap;
 }
 .bi-wrp.bi-default-theme.bi-vertical .bi-mlst-label {
 	top:-30px;/*-35px;*/

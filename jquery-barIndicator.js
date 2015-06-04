@@ -1,5 +1,5 @@
 /*!
-*	jQuery - BarIndicator_1.0
+*	jQuery - barIndicator
 *	A jQuery plugin that helps you visualize percentage or absolute amounts with bars
 *	Author: Ioannis Kapantzakis
 *	Released under the MIT License
@@ -8,10 +8,11 @@
 	
 	var pluginName = 'barIndicator';
 	
-	function Plugin(element, options) {
+	function Plugin(element, options, selector) {
 		this.el = element;
-		this.$el = $(element);
+		this.$el = $(element);		
 		this.opt = $.extend({}, $.fn[pluginName].defaults, options );
+		this.selector = selector;
 		this._init();
 	}
 	
@@ -22,22 +23,16 @@
 			var that = this;
 			var $el = that.$el;
 			var opt = that.opt;
+			var selector = that.selector;
+			
 			var style = opt.style;
 			var data = opt.data;
 			var type = opt.numType;
-			var dec = opt.lbDecimals;
+			var dec = opt.lbDecimals;	
 			
 			var orText = $el.text();
 			var orClass = $el.attr('class');
-			
-			//Get original attributes
-			$.each(this.el.attributes, function() {
-				if(this.specified) {
-					console.log(this.name + ': ' + this.value);
-				}
-			});
-			
-			
+
 			if (data != false && !isNaN(data)) {
 				var num = parseFloat(data).toFixed(dec);
 			} else if (data == false) {
@@ -45,7 +40,6 @@
 			} else {
 				console.log('data are not valid');
 			}
-			
 			//Get length object
 			var paramsLength = {
 				that: that,
@@ -56,15 +50,19 @@
 			var barLength = lengthObj.barLength;
 			
 			//Add classes (bi-wrp + theme class)
-			$el.addClass(opt.wrpClass + ' ' + opt.theme);
+			$el.addClass(opt.wrpClass + ' ' + opt.theme).attr('data-lbNum', lbNum);
 			
 			//Store original attributes (applied on destroy)
 			$.data($el, 'storedAttr', {
+				'selector': selector,
 				'orClass': orClass,
 				'orText': orText,
 				'barLength': barLength,
-				'num': num
+				'num': num,
+				'lbNum': lbNum,
+				'numType': type
 			});
+			//console.log($.data($el, 'storedAttr'));
 			
 			// Build and get inner html ------------------------------------------------------------------------------------------------- //			
 			if (style == 'vertical') {	
@@ -210,24 +208,24 @@
 			}
 			$el.addClass(labelVisClass);
 			
-			//Set milestones
-			var mlst = opt.milestones; 
-			if (mlst && !$.isEmptyObject(mlst)) {
-				var paramsMlst = {
-					that: that
-				}
-				Plugin.prototype._getMilestones.apply(this, [paramsMlst]);
-			}
-			
-			//Set average (if set to active)
+			//If average (avgActive) is set to true, first calculate the average and then set the milestones
 			var avg = opt.avgActive;
 			if (avg == true) {
 				var paramsAvg = {
 					that: that
 				}
 				Plugin.prototype._getAverage.apply(this, [paramsAvg]);
+			} else {
+				//Set milestones
+				var mlst = opt.milestones; 
+				if (mlst && !$.isEmptyObject(mlst)) {
+					var paramsMlst = {
+						that: that
+					}
+					Plugin.prototype._getMilestones.apply(this, [paramsMlst]);
+				}
 			}
-			
+						
 			//Load bar -------------------------------------------------------------------------------------------------------- //			
 			if (opt.animation == true) {
 				var timeOut = opt.timeout;
@@ -424,15 +422,23 @@
 		_getMilestones: function(par) {
 			if (par) {
 				var that = par.that;
-				var $el = that.$el;
-				var barWrp = $el.find('.bi-bar');
+				var $el = that.$el;				
 				var opt = that.opt;
 				var style = opt.style;
 				var mlst = opt.milestones;
+				var slf = par.self; 
+				if (slf) {
+					var barWrp = slf.find('.bi-bar');
+				} else {
+					var barWrp = $el.find('.bi-bar');
+				}
 				//Append milestones
-				for (m in mlst) {
-					var pos = m;	
+				if (par.mlstObj) {
+					mlst = par.mlstObj;
+				}	
+				for (m in mlst) {	
 					var mlstObj = mlst[m];
+					var pos = mlstObj.mlPos;
 					var mlstId = mlstObj.mlId;
 					var mlstClass = mlstObj.mlClass;
 					var mlstDim = mlstObj.mlDim;
@@ -445,19 +451,32 @@
 						that: that,
 						num: pos
 					}
+					var mlstLb = mlstLabel;
+					if (opt.avgLabelNum == true) {
+						if (mlstObj.mlClass == 'bi-average-mlst') {							
+							mlstLb = mlstLabel + ' ' + mlstObj.mlPos;
+							if (opt.numType == 'percent') {
+								mlstLb += '%';
+							}
+						}						
+					}
 					var lengthObj = Plugin.prototype._getLength.apply(this, [paramsLength]);
 					var barLength = lengthObj.barLength;
-					
 					var ml = '<span class="bi-milestone bi-mlst_' + m + ' ' + mlstClass + '" data-id="' + mlstId + '" data-pos="' + barLength + '" data-dim="' + mlstDim + '" data-label="' + mlstLabel + '" data-visible="' + mlstVis + '" data-hoverRange="' + mlstHoverRange + '" data-mlLineWidth="' + mlstLineHeight + '">';
 					ml += '<span class="bi-mlst-inner"><span class="bi-mlst-innerLine"></span>';
-					ml += '<span class="bi-mlst-label"><span class="bi-mlst-labelTxt">' + mlstLabel + '</span></span>';
+					ml += '<span class="bi-mlst-label"><span class="bi-mlst-labelTxt">' + mlstLb + '</span></span>';
 					ml +=' </span></span>';
 					barWrp.append(ml);
 					var $ml = barWrp.find('.bi-mlst_' + m);
 					$(document).trigger('bi.milestoneAppended', [$ml]);
 				}
 				//Give position and (if true)dimensions
-				$el.find('.bi-milestone').each(function() {
+				if (slf) {
+					var thisEl = slf;
+				} else {
+					var thisEl = $el;
+				}
+				thisEl.find('.bi-milestone').each(function() {
 					var ml = $(this);
 					var mlId = ml.attr('data-id');
 					var mlPos = ml.attr('data-pos');
@@ -534,14 +553,93 @@
 				var that = par.that;
 				var $el = that.$el;
 				var opt = that.opt;
-				console.log('set average');
+				var barWrp = $el.find('.bi-bar');
+				
+				var avgMlDim = opt.avgMlDim;
+				var avgLabel = opt.avgLabel;
+				var avgLabelNum = opt.avgLabelNum;
+				var avgLabelVis = opt.avgLabelVis;
+				var avgLabelHoverRange = opt.avgLabelHoverRange;
+				var avgLineHeight = opt.avgLineWidth;
+				
+				//Detect data-avgClass attributes
+				var dtAvgCl = $el.attr('data-avgClass');
+				if (dtAvgCl && dtAvgCl.length > 0) {
+					var avgAttr = $el.attr('data-biAvg');
+					var sel = $.data($el,'storedAttr').selector;
+					var elem = $(sel + '[data-avgClass="' + dtAvgCl + '"]');
+					var notInitCount = 0;
+					elem.each(function() {	
+						var notInit = !$.data(this, 'plugin_' + pluginName);
+						if (notInit == true) {
+							notInitCount++;
+						}
+					});
+					if (notInitCount == 1 && elem.length > 1) {
+						var sum = 0;
+						var i = 1;
+						elem.each(function() {		
+							var that = $(this);
+							if (!that.hasClass('bi-avgCalculated')) {
+								var lbNum = parseFloat(that.attr('data-lbNum'));
+								that.addClass('bi-avgCalculated');							
+								sum += lbNum;
+								i++;	
+							}
+						});
+						var avg = sum / (i - 1);
+						elem.attr('data-biAvg', avg.toFixed(2));	
+						var trigObj = {
+							that: par.that,
+							sel: sel
+						}
+						$(document).trigger('bi.dataAvgSet', [trigObj]);
+					}	
+				}
+			}
+		},
+		
+		_setAvgMilestone: function(par) {
+			if (par) {
+				var that = par.that;
+				var $el = par.$el;
+				var opt = that.opt;
+				var mlst = opt.milestones;
+				var avgAttr = $el.attr('data-biAvg');
+				if (avgAttr && avgAttr.length > 0) {
+					var avg = parseFloat(avgAttr);
+					var avgObj = {
+						avg: {
+							mlPos: avg,
+							mlId: opt.avgMlId,
+							mlClass: opt.avgMlClass,
+							mlDim: opt.avgMlDim,
+							mlLabel: opt.avgLabel,
+							mlLabelVis: opt.avgLabelVis,	 
+							mlHoverRange: opt.avgLabelHoverRange,	
+							mlLineWidth: opt.avgLineWidth	
+						}
+					};
+					var mlstObj = $.extend({}, mlst, avgObj);
+				} else {
+					var mlstObj = mlst;
+				}				
+				if (mlstObj && !$.isEmptyObject(mlstObj)) {					
+					var paramsMlst = {
+						that: par.that,
+						self: par.$el,
+						mlstObj: mlstObj
+					}					
+					Plugin.prototype._getMilestones.apply(this, [paramsMlst]);
+				}
 			}
 		},
 		
 		//Getters (no chainability) ---------------------------------------------------------------------- //
-		getPluginData: function() {
+		getPluginData: function() {			
 			var $el = this.$el;
-			var pluginData = $.data($el, 'storedAttr');
+			var pluginData = $.data($el,'storedAttr');
+			console.log(pluginData);
 			return pluginData;
 		},
 		
@@ -623,8 +721,9 @@
 			//console.log('destroy()');
 			var $el = this.$el;
 			var opt = this.opt;
-			var orText = $.data($el, 'storedAttr').orText;
-			var orClass = $.data($el, 'storedAttr').orClass;
+			var storedData = $.data($el, 'storedAttr'); 
+			var orText = storedData.orText;
+			var orClass = storedData.orClass;
 			$el.removeData()
 				.empty()
 				.html(orText)
@@ -634,11 +733,12 @@
 	}
 		
 	$.fn[pluginName] = function(options) {
-		var args = arguments;			
+		var args = arguments;	
+		var selector = $(this).selector;
 		if (options === undefined || typeof options === 'object') {
-			return this.each(function() {				
+			return this.each(function() {			
 				if (!$.data(this, 'plugin_' + pluginName)) {
-					$.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+					$.data(this, 'plugin_' + pluginName, new Plugin(this, options, selector));
 				}
 			});	
 		} else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
@@ -696,11 +796,12 @@
 		labelNumCount: true,	
 		counterStep: 10,		
 		milestones: {
-			50: {
+			1: {
+				mlPos: 50,
 				mlId: false,
 				mlClass: 'bi-middle-mlst',
 				mlDim: 'inherit',
-				mlLabel: 'Average',
+				mlLabel: 'Half',
 				mlLabelVis: 'hover',	 
 				mlHoverRange: 15,	
 				mlLineWidth: 1	
@@ -710,11 +811,26 @@
 		avgGroupClass: '',
 		avgMlId: false,
 		avgMlClass: 'bi-average-mlst',
+		avgMlDim: 'inherit',
+		avgLabel: 'Average',
 		avgLabelNum: true,	//if true, the avg amount is visible on the milestone label
 		avgLabelVis: 'hover',	//'hover'|'visible'|'hidden'
 		avgLabelHoverRange: 15,	//[px]
 		avgLineWidth: 1	//[px]
 	}
+	
+	$(document).on('bi.dataAvgSet', function(e,a) {		
+		var sel = a.sel;
+		$(sel).each(function() {			
+			var self = $(this);
+			var paramsAvg = {
+				that: a.that,
+				$el: self
+			};
+			//console.log(self.text());
+			Plugin.prototype._setAvgMilestone.apply(this, [paramsAvg]);
+		});
+	});
 	
 	//TODO ------------------------------------------------------------------------------------------------------ //
 	// 1) Milestones --> OK
