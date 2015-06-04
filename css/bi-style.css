@@ -1,0 +1,160 @@
+.bi-wrp {
+	display:inline-block;
+	position:relative;
+}
+.bi-wrp.bi-horizontal {
+	width:100%;
+}
+.bi-bar {
+	position:relative;
+}
+.bi-vertical .bi-bar { display:table-cell }
+.bi-barInner {
+	position:absolute;
+}
+.bi-vertical .bi-barInner {
+	width:100%;
+	bottom:0;
+}
+
+.bi-horizontal .bi-bar { 
+	width:100%;
+	float: left;
+}
+.bi-horizontal .bi-barInner {
+	top:0;
+	bottom:0;
+	left:0;
+}
+.bi-vertical .bi-barInner {
+	width:100%;
+	bottom:0;
+}
+.bi-vertical .bi-label {
+	display:table-cell;
+}
+.bi-label-l { padding-right:5px }
+.bi-label-r { padding-left:5px }
+
+.bi-hor-topLeft .bi-label,
+.bi-hor-topRight .bi-label {	padding-bottom: 5px }
+.bi-hor-topLeft .bi-label,
+.bi-hor-left .bi-label { float:left }
+.bi-hor-topRight .bi-label,
+.bi-hor-right .bi-label { float:right }
+.bi-hor-left .bi-label,
+.bi-hor-right .bi-label { padding:5px }
+
+/* Title ------------------------------------------------ */
+.bi-titleSpan { display:inline-block }
+.bi-titleSpan.bi-titleSpan-topLeft {
+	float:left;
+	margin-right:10px;
+}
+.bi-titleSpan.bi-titleSpan-topRight { }
+.bi-titleSpan.bi-titleSpan-left,
+.bi-titleSpan.bi-titleSpan-right { width:100% }
+.bi-titleSpan.bi-titleSpan-right { text-align:right }
+
+/* Label ------------------------------------------------ */
+/* Hover */
+.bi-label-vis-hover .bi-label { 
+	position:absolute;
+	background-color: #f1f1f1;
+	padding: 5px 10px;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+	-webkit-box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+	-moz-box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+	-ms-box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);
+	-o-box-shadow: 0 0 5px 0 rgba(0,0,0,0.5);	
+	display:none;
+}
+.bi-label-vis-hover:hover .bi-label { display:block }
+/* Hidden */
+.bi-label-vis-hidden .bi-label { display:none }
+
+/* Milestone --------------------------------------------- */
+.bi-milestone { 
+	position:absolute;
+	z-index:1050;
+	cursor:pointer;
+}
+.bi-mlst-inner {
+	width:100%;
+	height:100%;
+	float:left;
+	position:relative;
+	background-color:transparent;
+}
+.bi-mlst-innerLine,
+.bi-mlst-label {
+	display:inline-block;
+	position: absolute;
+}
+.bi-mlst-label { 
+	opacity:0;
+	transition: all 150ms ease-out;
+}
+.bi-horizontal .bi-mlst-inner.bi-mlst-innerVisible .bi-mlst-label { opacity:1;display:block }
+.bi-horizontal .bi-mlst-inner.bi-mlst-innerHidden .bi-mlst-label { display:none }
+.bi-horizontal .bi-mlst-inner.bi-mlst-innerHover:hover .bi-mlst-label { 
+	opacity:1;
+	top:-28px;
+}
+.bi-vertical .bi-mlst-inner.bi-mlst-innerHover:hover .bi-mlst-label { 
+	opacity:1;
+	top:-35px;
+}
+/* Themes ======================================================= */
+/* Default ------------------------------------------------------ */
+.bi-wrp.bi-default-theme .bi-bar {
+	box-shadow: inset 0 0 10px -3px rgba(0,0,0,0.5);
+	-webkit-box-shadow: inset 0 0 10px -3px rgba(0,0,0,0.5);
+	-ms-box-shadow: inset 0 0 10px -3px rgba(0,0,0,0.5);
+	-o-box-shadow: inset 0 0 10px -3px rgba(0,0,0,0.5);
+	-moz-box-shadow: inset 0 0 10px -3px rgba(0,0,0,0.5);
+}
+.bi-wrp.bi-default-theme .bi-barInner {
+	background-color: #3498db;
+}
+/* (Default) Bar color variations relative to label value */
+.bi-wrp.bi-default-theme.bi-cRange-optimal .bi-barInner { background-color:rgb(92, 184, 92) }
+.bi-wrp.bi-default-theme.bi-cRange-alert .bi-barInner { background-color:rgb(217, 170, 79) }
+.bi-wrp.bi-default-theme.bi-cRange-critical .bi-barInner { background-color:rgb(217, 83, 79) }
+/* (Default) Milestones */
+.bi-wrp.bi-default-theme .bi-milestone {
+	background-color:transparent;
+}
+.bi-wrp.bi-default-theme.bi-vertical .bi-milestone {	
+	left:50%;
+}
+.bi-wrp.bi-default-theme.bi-horizontal .bi-milestone {
+	top:50%;
+}
+.bi-wrp.bi-default-theme .bi-mlst-innerLine {
+	background-color:#555;
+}
+.bi-wrp.bi-default-theme.bi-vertical .bi-mlst-innerLine {
+	left:0;
+	right:0;
+	top:50%;
+}
+.bi-wrp.bi-default-theme.bi-horizontal .bi-mlst-innerLine {
+	top:0;
+	bottom:0;
+	left:50%;
+}
+.bi-wrp.bi-default-theme .bi-mlst-label {
+	padding:5px;	
+	background-color:#555;
+	color:#fff;
+	border-radius:3px;
+	font-size: 0.8em;
+}
+.bi-wrp.bi-default-theme.bi-vertical .bi-mlst-label {
+	top:-30px;/*-35px;*/
+}
+.bi-wrp.bi-default-theme.bi-horizontal .bi-mlst-label {
+	top:-23px;/*-28px;*/
+}
+

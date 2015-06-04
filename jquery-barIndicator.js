@@ -1,0 +1,725 @@
+/*!
+*	jQuery - BarIndicator_1.0
+*	A jQuery plugin that helps you visualize percentage or absolute amounts with bars
+*	Author: Ioannis Kapantzakis
+*	Released under the MIT License
+*/ 
+;(function($, window, document, undefined) {
+	
+	var pluginName = 'barIndicator';
+	
+	function Plugin(element, options) {
+		this.el = element;
+		this.$el = $(element);
+		this.opt = $.extend({}, $.fn[pluginName].defaults, options );
+		this._init();
+	}
+	
+	Plugin.prototype = {
+		
+		//Private methods -------------------------------------------------------------------------------- //
+		_init: function() {
+			var that = this;
+			var $el = that.$el;
+			var opt = that.opt;
+			var style = opt.style;
+			var data = opt.data;
+			var type = opt.numType;
+			var dec = opt.lbDecimals;
+			
+			var orText = $el.text();
+			var orClass = $el.attr('class');
+			
+			//Get original attributes
+			$.each(this.el.attributes, function() {
+				if(this.specified) {
+					console.log(this.name + ': ' + this.value);
+				}
+			});
+			
+			
+			if (data != false && !isNaN(data)) {
+				var num = parseFloat(data).toFixed(dec);
+			} else if (data == false) {
+				var num = parseFloat(orText.replace(',','.')).toFixed(dec);
+			} else {
+				console.log('data are not valid');
+			}
+			
+			//Get length object
+			var paramsLength = {
+				that: that,
+				num: num
+			}
+			var lengthObj = Plugin.prototype._getLength.apply(this, [paramsLength]);
+			var lbNum = lengthObj.lbNum;
+			var barLength = lengthObj.barLength;
+			
+			//Add classes (bi-wrp + theme class)
+			$el.addClass(opt.wrpClass + ' ' + opt.theme);
+			
+			//Store original attributes (applied on destroy)
+			$.data($el, 'storedAttr', {
+				'orClass': orClass,
+				'orText': orText,
+				'barLength': barLength,
+				'num': num
+			});
+			
+			// Build and get inner html ------------------------------------------------------------------------------------------------- //			
+			if (style == 'vertical') {	
+				var lb = opt.vertLabelPos;		
+				var w = opt.vertBarWidth;
+				var h = opt.vertBarHeight;
+				var elemH = $el.css('height');
+				var va = opt.vertLabelAlign;
+				$el.addClass('bi-vertical');
+				
+				if (h == 'line') {
+					var bh = elemH;
+				} else if (h.indexOf('%') != -1) {
+					//Percent of line height
+					var bh = parseFloat(elemH) * (parseFloat(h.replace('%','')) / 100);
+				} else if (h.indexOf('px') != -1) {
+					var bh = h.replace('px','');
+				}
+					
+				var bar = '<div class="bi-bar" style="width:' + w + 'px;height:' + bh + '"><div class="bi-barInner"></div></div>';
+				if (lb == 'right') {
+					var label = '<span class="bi-label bi-label-r" style="vertical-align:' + va + '">' + lbNum + '</span>';
+					var inner = bar + label;
+				} else if (lb == 'left') {
+					var label = '<span class="bi-label bi-label-l" style="vertical-align:' + va + '">' + lbNum + '</span>';
+					var inner = label + bar;
+				}
+			} else if (style == 'horizontal') {
+				var bh = opt.horBarHeight;
+				var lbPos = opt.horLabelPos;
+				var ttl = opt.horTitle;
+				
+				var label = '<span class="bi-label">' + lbNum + '</span>';
+				var bar = '<div class="bi-bar" style="height:' + bh + 'px"><div class="bi-barInner"></div></div>';
+				
+				switch (lbPos) {
+					case 'topLeft':
+						var horPosClass = 'bi-hor-topLeft';
+						var inner = label + bar;
+						break;
+					case 'topRight':
+						var horPosClass = 'bi-hor-topRight';
+						var inner = label + bar;
+						break;
+					case 'left':
+						var horPosClass = 'bi-hor-left';
+						var inner = label + bar;
+						break;
+					case 'right':
+						var horPosClass = 'bi-hor-right';
+						var inner = bar + label;
+						break;
+				}
+				$el.addClass('bi-horizontal ' + horPosClass);
+			}
+			
+			if (style == 'horizontal' && ttl != false) {
+				var title = '<span class="bi-titleSpan bi-titleSpan-' + lbPos + '">' + ttl + '</span>';
+				inner = title + inner;
+			}
+			
+			//Append inner html
+			$el.empty().append(inner);
+			var bi_bar = $el.find('.bi-barInner');
+			var bi_barHolder = $el.find('.bi-bar');
+			var bi_label = $el.find('.bi-label');
+			//Trigger event
+			$(document).trigger('bi.innerContentAppended', [$el]);
+			
+			if (style == 'horizontal') {
+				var lbPos = opt.horLabelPos;
+				if (lbPos == 'left' || lbPos == 'right') {
+					var wrpW = parseFloat($el.outerWidth());
+					var lbW = parseFloat($el.find('.bi-label').outerWidth());
+					var barWrpW = wrpW - lbW - 1;
+					var lbH = $el.find('.bi-label').outerHeight();
+					var topPos = (lbH - bh) / 2;
+					//console.log(lbH + ' - ' + bh);
+					bi_barHolder.css({'width':barWrpW + 'px','top':topPos + 'px'});					
+				}
+			}
+			
+			//Apply colours (if set in options)
+			var foreColor = opt.foreColor;
+			var backColor = opt.backColor;
+			var labelColor = opt.labelColor;
+			if (foreColor != false) {
+				var fColor = Plugin.prototype._getColorValue.apply(this, [foreColor]);
+				if (fColor) {
+					bi_bar.css({'background-color':fColor});
+				}
+			}
+			if (backColor != false) {
+				var bColor = Plugin.prototype._getColorValue.apply(this, [backColor]);
+				if (bColor) {
+					bi_barHolder.css({'background-color':bColor});
+				}
+			}
+			if (labelColor != false) {
+				var lColor = Plugin.prototype._getColorValue.apply(this, [labelColor]);
+				if (lColor) {
+					bi_label.css({'color':lColor});
+				}
+			}
+			
+			//ColorRange
+			var paramsColorRange = {
+				that: that,
+				num: num
+			}
+			var lengthObj = Plugin.prototype._getColorRangeClass.apply(this, [paramsColorRange]);
+			
+			//Set label visibility and position (hover)
+			switch (opt.labelVisibility) {
+				case 'default':
+					var labelVisClass = 'bi-label-vis-default';
+					break;
+				case 'hover':
+					var labelVisClass = 'bi-label-vis-hover';
+					var posObj = opt.labelHoverPos;
+					var lb = $el.find('.bi-label');
+					var posString = '';
+					for(n in posObj) {
+						switch (n) {
+							case 'top':
+								lb.css({'top':posObj[n]});
+								break;
+							case 'left':
+								lb.css({'left':posObj[n]});
+								break;
+							case 'bottom':
+								lb.css({'bottom':posObj[n]});
+								break;
+							case 'right':
+								lb.css({'right':posObj[n]});
+								break;
+						}
+					}
+					break;
+				case 'hidden':
+					var labelVisClass = 'bi-label-vis-hidden';
+					break;
+			}
+			$el.addClass(labelVisClass);
+			
+			//Set milestones
+			var mlst = opt.milestones; 
+			if (mlst && !$.isEmptyObject(mlst)) {
+				var paramsMlst = {
+					that: that
+				}
+				Plugin.prototype._getMilestones.apply(this, [paramsMlst]);
+			}
+			
+			//Set average (if set to active)
+			var avg = opt.avgActive;
+			if (avg == true) {
+				var paramsAvg = {
+					that: that
+				}
+				Plugin.prototype._getAverage.apply(this, [paramsAvg]);
+			}
+			
+			//Load bar -------------------------------------------------------------------------------------------------------- //			
+			if (opt.animation == true) {
+				var timeOut = opt.timeout;
+				var event = opt.triggerEvent;
+				var paramsAnim = {
+					that: that,
+					bl: barLength
+				}
+				var paramsCount = {
+					that: that,
+					target: num
+				}
+				if (event == 'load') {
+					$(window).load(function() {
+						Plugin.prototype._animateBar.apply(this, [paramsAnim]);
+						if (opt.labelNumCount == true) {
+							Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
+						}
+					});
+				} else {
+					$(document).on(event, function() {
+						Plugin.prototype._animateBar.apply(this, [paramsAnim]);
+						if (opt.labelNumCount == true) {
+							Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
+						}
+					});
+				}
+			} else {
+				var style = opt.style;
+				if (style == 'vartical') {
+					bi_bar.css({'height': barLength});
+				} else if (style == 'horizontal') {
+					bi_bar.css({'width': barLength});
+				}
+			}
+		},
+				
+		_getLength: function(par) {
+			if (par) {
+				var that = par.that;
+				var opt = that.opt;
+				var type = opt.numType;
+				var num = par.num;
+				
+				if (type == 'percent') {
+					var lbNum = num + '%';
+					var barLength = num + '%';
+				} else if (type == 'absolute') {
+					var lbNum = num;
+					var min = opt.numMin;
+					var max = opt.numMax;
+					var barLength = num / (max - min) + '%';
+				}
+				var lengthObj = {
+					lbNum: lbNum,
+					barLength: barLength
+				};
+				return lengthObj;
+			}
+		},
+				
+		_getColorRangeClass: function(par) {
+			if (par) {				
+				var that = par.that;
+				var num = par.num;
+				var $el = that.$el;
+				var bar = $el.find('.bi-barInner');
+				var opt = that.opt;	
+				if (bar.attr('style')) {
+					bar.attr('style', bar.attr('style').replace('background-color', ''));
+				}
+				if (opt.colorRange == true) {				
+					var limObj = opt.colorRangeLimits;					
+					var allRangeClasses = '';
+					for (l in limObj) {						
+						var rng = limObj[l].split('-');
+						var min = parseFloat(rng[0]);
+						var max = parseFloat(rng[1]);
+						//If range colour is passed into the options object						
+						if (num >= min && num <= max) {
+							var rangeClass = 'bi-cRange-' + l;
+							if (rng.length == 3) {
+								var rngColor = rng[2];
+								var rngCl = Plugin.prototype._getColorValue.apply(this, [rngColor]);
+								if (typeof rngCl !== 'undefined') {
+									bar.css({'background-color':rngCl});
+								};
+							}
+						}
+						allRangeClasses += 'bi-cRange-' + l + ' ';
+					}					
+					//Remove any bi-cRange-* class and add the appropriate one
+					$el.removeClass(allRangeClasses).addClass(rangeClass);
+				}
+			}
+		},
+				
+		_animateBar: function(par) {	
+			if (par) {
+				var that = par.that;
+				var opt = that.opt;
+				var style = opt.style;
+				var at = opt.animTime;
+				var eas = opt.easing;
+				var tm = opt.timeOut;
+				var bar = that.$el.find('.bi-barInner');
+				var bl = par.bl;
+				
+				setTimeout(function() {
+					if (style == 'vertical') {
+						if (par.reanim == true) { 
+							bar.css({'height':0}); 
+						}
+						bar.animate({'height':bl},at,eas).queue(function() {
+							$(document).trigger('bi.animationCompleted');
+							if (par.reanim == true) { $(document).trigger('bi.reanimateBarStop'); }
+							if (par.loadData == true) { $(document).trigger('bi.loadDataStop'); }
+							$(this).dequeue();
+						});
+					} else if (style == 'horizontal') {
+						if (par.reanim == true) { 
+							bar.css({'width':0}); 
+						}
+						bar.animate({'width':bl},at,eas).queue(function() {
+							$(document).trigger('bi.animationCompleted');
+							if (par.reanim == true) { $(document).trigger('bi.reanimateBarStop'); }
+							if (par.loadData == true) { $(document).trigger('bi.loadDataStop'); }
+							$(this).dequeue();
+						});
+					}
+				},tm);
+			}
+		},
+				
+		_labelNumCounter: function(par) {
+			if (par) {
+				var that = par.that;
+				var opt = that.opt;
+				var $el = that.$el;
+				var label = $el.find('.bi-label');
+				var min = opt.numMin;
+				var target = parseFloat(par.target);
+				var countTime = opt.animTime;
+				var decim = opt.lbDecimals;
+				var step = opt.counterStep;
+				
+				if (opt.numType == 'percent') {
+					var sign = '%';
+				} else if (type == 'absolute') {
+					var sign = '';
+				}
+				var i = parseFloat(min);
+				var ct = (countTime / (target - i)) * step;
+				label.html(min + sign);
+				function counter() {
+					//console.log(i);
+					setTimeout(function() {
+						label.html(i.toFixed(decim) + sign);					
+						if (i<target) {						
+							if ((target - i) > step) {
+								i+= step;
+							} else {
+								i = target;
+							}						
+							counter();
+						}
+					},ct);				
+				}	
+				counter();		
+			}
+		},
+				
+		_getColorValue: function(par) {
+			if (par) {
+				var validHex = new RegExp(/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i);
+				var colorNameList = ["AliceBlue","AntiqueWhite","Aqua","Aquamarine","Azure","Beige","Bisque","Black","BlanchedAlmond","Blue","BlueViolet","Brown","BurlyWood","CadetBlue","Chartreuse","Chocolate","Coral","CornflowerBlue","Cornsilk","Crimson","Cyan","DarkBlue","DarkCyan","DarkGoldenRod","DarkGray","DarkGrey","DarkGreen","DarkKhaki","DarkMagenta","DarkOliveGreen","Darkorange","DarkOrchid","DarkRed","DarkSalmon","DarkSeaGreen","DarkSlateBlue","DarkSlateGray","DarkSlateGrey","DarkTurquoise","DarkViolet","DeepPink","DeepSkyBlue","DimGray","DimGrey","DodgerBlue","FireBrick","FloralWhite","ForestGreen","Fuchsia","Gainsboro","GhostWhite","Gold","GoldenRod","Gray","Grey","Green","GreenYellow","HoneyDew","HotPink","IndianRed","Indigo","Ivory","Khaki","Lavender","LavenderBlush","LawnGreen","LemonChiffon","LightBlue","LightCoral","LightCyan","LightGoldenRodYellow","LightGray","LightGrey","LightGreen","LightPink","LightSalmon","LightSeaGreen","LightSkyBlue","LightSlateGray","LightSlateGrey","LightSteelBlue","LightYellow","Lime","LimeGreen","Linen","Magenta","Maroon","MediumAquaMarine","MediumBlue","MediumOrchid","MediumPurple","MediumSeaGreen","MediumSlateBlue","MediumSpringGreen","MediumTurquoise","MediumVioletRed","MidnightBlue","MintCream","MistyRose","Moccasin","NavajoWhite","Navy","OldLace","Olive","OliveDrab","Orange","OrangeRed","Orchid","PaleGoldenRod","PaleGreen","PaleTurquoise","PaleVioletRed","PapayaWhip","PeachPuff","Peru","Pink","Plum","PowderBlue","Purple","Red","RosyBrown","RoyalBlue","SaddleBrown","Salmon","SandyBrown","SeaGreen","SeaShell","Sienna","Silver","SkyBlue","SlateBlue","SlateGray","SlateGrey","Snow","SpringGreen","SteelBlue","Tan","Teal","Thistle","Tomato","Turquoise","Violet","Wheat","White","WhiteSmoke","Yellow","YellowGreen"];
+				if (par.indexOf('rgb') == -1) {
+					if (par.indexOf('#') == 0) {
+						if (validHex.test(par)) {
+							var fColor = par;
+						}
+					} else {
+						if ($.inArray(par, colorNameList)) {
+							var fColor = par;
+						}
+					}
+				} else {
+					var fColor = par;
+				}
+				return fColor;
+			}
+		},
+				
+		_getMilestones: function(par) {
+			if (par) {
+				var that = par.that;
+				var $el = that.$el;
+				var barWrp = $el.find('.bi-bar');
+				var opt = that.opt;
+				var style = opt.style;
+				var mlst = opt.milestones;
+				//Append milestones
+				for (m in mlst) {
+					var pos = m;	
+					var mlstObj = mlst[m];
+					var mlstId = mlstObj.mlId;
+					var mlstClass = mlstObj.mlClass;
+					var mlstDim = mlstObj.mlDim;
+					var mlstLabel = mlstObj.mlLabel;
+					var mlstVis = mlstObj.mlLabelVis;
+					var mlstHoverRange = mlstObj.mlHoverRange;
+					var mlstLineHeight = mlstObj.mlLineWidth;
+					//Get length object
+					var paramsLength = {
+						that: that,
+						num: pos
+					}
+					var lengthObj = Plugin.prototype._getLength.apply(this, [paramsLength]);
+					var barLength = lengthObj.barLength;
+					
+					var ml = '<span class="bi-milestone bi-mlst_' + m + ' ' + mlstClass + '" data-id="' + mlstId + '" data-pos="' + barLength + '" data-dim="' + mlstDim + '" data-label="' + mlstLabel + '" data-visible="' + mlstVis + '" data-hoverRange="' + mlstHoverRange + '" data-mlLineWidth="' + mlstLineHeight + '">';
+					ml += '<span class="bi-mlst-inner"><span class="bi-mlst-innerLine"></span>';
+					ml += '<span class="bi-mlst-label"><span class="bi-mlst-labelTxt">' + mlstLabel + '</span></span>';
+					ml +=' </span></span>';
+					barWrp.append(ml);
+					var $ml = barWrp.find('.bi-mlst_' + m);
+					$(document).trigger('bi.milestoneAppended', [$ml]);
+				}
+				//Give position and (if true)dimensions
+				$el.find('.bi-milestone').each(function() {
+					var ml = $(this);
+					var mlId = ml.attr('data-id');
+					var mlPos = ml.attr('data-pos');
+					var mlDim = ml.attr('data-dim');
+					var mlLabel = ml.attr('data-label');
+					var mlVis = ml.attr('data-visible');
+					var mlHoverRange = ml.attr('data-hoverRange');
+					var mlLineWidth = ml.attr('data-mlLineWidth');
+					var absolutePull = parseFloat(mlHoverRange) / 2;
+					var mlLineAbsPull = parseFloat(mlLineWidth) / 2;
+										
+					var mlInner = ml.find('.bi-mlst-inner');
+					var mlLine = mlInner.find('.bi-mlst-innerLine');
+										
+					//Get id (if set)
+					if (mlId != 'false') {
+						ml.attr('id', mlId);
+					}					
+					//Get position
+					if (style == 'vertical') {						
+						ml.css({
+							'bottom':mlPos,
+							'height':mlHoverRange + 'px',
+							'margin-bottom': -absolutePull + 'px'
+						});
+						mlLine.css({
+							'height': mlLineWidth + 'px',
+							'margin-top': -mlLineAbsPull + 'px'
+						});
+					} else if (style == 'horizontal') {
+						ml.css({
+							'left':mlPos,
+							'width':mlHoverRange + 'px',
+							'margin-left': -absolutePull + 'px'
+						});
+						mlLine.css({
+							'width': mlLineWidth + 'px',
+							'margin-left': -mlLineAbsPull + 'px'
+						});
+					}
+					//Get label visibility
+					if (mlVis == 'hover') {
+						mlInner.addClass('bi-mlst-innerHover').removeClass('bi-mlst-innerVisible bi-mlst-innerHidden');
+					} else if (mlVis == 'visible') {
+						mlInner.addClass('bi-mlst-innerVisible').removeClass('bi-mlst-innerHover bi-mlst-innerHidden');
+					} else if (mlVis == 'hidden') {
+						mlInner.addClass('bi-mlst-innerHidden').removeClass('bi-mlst-innerVisible bi-mlst-innerHover');
+					}
+					//If mlDim != false -> apply the given dimensions
+					if (mlDim != false) {
+						if (mlDim == 'inherit') {
+							var d = '100%';
+						} else if (mlDim.indexOf('%') != -1 || mlDim.indexOf('px') != -1) {
+							var d = mlDim;
+						}						
+						if (style == 'vertical') {						
+							ml.css({'width':d});
+							var mlW = ml.css('width');
+							var mrgL = parseFloat(mlW.replace('px','')) / 2;
+							ml.css({marginLeft: -mrgL + 'px'});
+						} else if (style == 'horizontal') {
+							ml.css({'height':d});
+							var mlH = ml.css('height');
+							var mrgT = parseFloat(mlH.replace('px','')) / 2;
+							ml.css({marginTop: -mrgT + 'px'});
+						}
+					}					
+				});				
+			}
+		},
+		
+		_getAverage: function(par) {
+			if (par) {
+				var that = par.that;
+				var $el = that.$el;
+				var opt = that.opt;
+				console.log('set average');
+			}
+		},
+		
+		//Getters (no chainability) ---------------------------------------------------------------------- //
+		getPluginData: function() {
+			var $el = this.$el;
+			var pluginData = $.data($el, 'storedAttr');
+			return pluginData;
+		},
+		
+		//Public methods --------------------------------------------------------------------------------- //
+		reanimateBar: function() {
+			var $el = this.$el;
+			var opt = this.opt;
+			var barLength = $.data($el, 'storedAttr').barLength;
+			var num = $.data($el, 'storedAttr').num;	
+
+			//Get color range class
+			var paramsColorRange = {
+				that: this,
+				num: num
+			}
+			var lengthObj = Plugin.prototype._getColorRangeClass.apply(this, [paramsColorRange]);
+			
+			//Reanimate bar
+			var paramsAnim = {
+				that: this,
+				bl: barLength,
+				reanim: true
+			}		
+			var paramsCount = {
+				that: this,
+				target: num
+			}
+			Plugin.prototype._animateBar.apply(this, [paramsAnim]);
+			if (opt.labelNumCount == true) {
+				Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
+			}
+			//Trigger event
+			$(document).trigger('bi.reanimateBarStart');
+		},
+		
+		loadNewData: function(par) {
+			if (par) {
+				var newNum = par;
+				
+				//Get length object
+				var paramsLength = {
+					that: this,
+					num: newNum
+				}
+				var lengthObj = Plugin.prototype._getLength.apply(this, [paramsLength]);
+				var lbNum = lengthObj.lbNum;
+				var barLength = lengthObj.barLength;
+				
+				//Get color range class
+				var paramsColorRange = {
+					that: this,
+					num: parseFloat(lbNum)
+				}
+				var lengthObj = Plugin.prototype._getColorRangeClass.apply(this, [paramsColorRange]);
+				
+				var paramsAnim = {
+					that: this,
+					bl: barLength,
+					loadData: true
+				}
+				var paramsCount = {
+					that: this,
+					target: lbNum
+				}	
+				Plugin.prototype._animateBar.apply(this, [paramsAnim]);
+				if (this.opt.labelNumCount == true) {
+					Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
+				}
+				//Trigger event
+				$(document).trigger('bi.loadDataStart');
+				//Change plugin stored data
+				var storedData = $.data(this.$el, 'storedAttr');
+				storedData['barLength'] = barLength;
+				storedData['num'] = newNum.replace('%','');
+			}
+		},
+				
+		destroy: function() {
+			//console.log('destroy()');
+			var $el = this.$el;
+			var opt = this.opt;
+			var orText = $.data($el, 'storedAttr').orText;
+			var orClass = $.data($el, 'storedAttr').orClass;
+			$el.removeData()
+				.empty()
+				.html(orText)
+				.attr('class', orClass);
+		}
+		
+	}
+		
+	$.fn[pluginName] = function(options) {
+		var args = arguments;			
+		if (options === undefined || typeof options === 'object') {
+			return this.each(function() {				
+				if (!$.data(this, 'plugin_' + pluginName)) {
+					$.data(this, 'plugin_' + pluginName, new Plugin(this, options));
+				}
+			});	
+		} else if (typeof options === 'string' && options[0] !== '_' && options !== 'init') {
+			if (Array.prototype.slice.call(args, 1).length == 0 && $.inArray(options, $.fn[pluginName].getters) != -1) {
+				var instance = $.data(this[0], 'plugin_' + pluginName);
+				return instance[options].apply(instance, Array.prototype.slice.call(args,1));
+			} else {
+				return this.each(function() {
+					var instance = $.data(this, 'plugin_' + pluginName);
+					if (instance instanceof Plugin && typeof instance[options] === 'function') {
+						instance[options].apply(instance, Array.prototype.slice.call(args, 1));
+					}
+				});
+			}
+		}
+	}
+	
+	$.fn[pluginName].getters = ['getPluginData'];
+	
+	$.fn[pluginName].defaults = {
+		wrpClass: 'bi-wrp',
+		data: false,
+		style: 'horizontal',	
+		theme: 'bi-default-theme',
+		animation: true,
+		animTime: 300,	
+		easing: 'easeOutExpo',
+		timeout: 0,	
+		colorRange: false,	
+		colorRangeLimits: {		
+			optimal: '0-40',
+			alert: '41-70',
+			critical: '71-100'
+		},
+		foreColor: false,	
+		backColor: false,
+		labelColor: false,		
+		labelVisibility: 'default', 
+		labelHoverPos: {
+			top:'0',
+			left:'20px'
+		},
+		vertLabelPos: 'right',	
+		vertLabelAlign: 'middle',	
+		horLabelPos: 'topLeft', 
+		horTitle: false,
+		numType: 'percent',
+		lbDecimals: 0,
+		numMin: 0,
+		numMax: 100,
+		vertBarWidth: 10,
+		horBarHeight: 10,
+		vertBarHeight: 'line',		
+		triggerEvent: 'load',	
+		labelNumCount: true,	
+		counterStep: 10,		
+		milestones: {
+			50: {
+				mlId: false,
+				mlClass: 'bi-middle-mlst',
+				mlDim: 'inherit',
+				mlLabel: 'Average',
+				mlLabelVis: 'hover',	 
+				mlHoverRange: 15,	
+				mlLineWidth: 1	
+			}
+		},
+		avgActive: false,
+		avgGroupClass: '',
+		avgMlId: false,
+		avgMlClass: 'bi-average-mlst',
+		avgLabelNum: true,	//if true, the avg amount is visible on the milestone label
+		avgLabelVis: 'hover',	//'hover'|'visible'|'hidden'
+		avgLabelHoverRange: 15,	//[px]
+		avgLineWidth: 1	//[px]
+	}
+	
+	//TODO ------------------------------------------------------------------------------------------------------ //
+	// 1) Milestones --> OK
+	// 2) Average (milestones) of groups etc --> TODO option: getAverage
+	// 3) Reanimate bar via new method --> OK
+	// 4) Title (already added data-title) --> OK
+	
+})(jQuery, window, document);
