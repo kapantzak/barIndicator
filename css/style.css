@@ -101,6 +101,24 @@ h3.sectionHeader {
 
 .testBar { margin-bottom:10px }
 
+.secInner-comments {
+	padding:10px;
+	background-color:#f4f4f4;
+	margin-bottom:20px;
+	font-weight:100;
+}
+.secInner-btn button {
+	border:none;
+	background-color:#61a8d8;
+	padding: 5px 10px;
+	font-size:1.1em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:100;
+	cursor:pointer;
+	color:#fff;
+}
+.secInner-btn button:hover { background-color:#3498db }
+
 footer {
 	position:relative;
 	margin-top:30px;

@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-	<title>kapantzak/barIndicator plugin</title>
+	<title>Bar Indicator - jQuery plugin</title>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,greek-ext' rel='stylesheet' type='text/css'>
 	<link href="css/style.css" rel="stylesheet" />
 	<link href="barIndicator/css/bi-style.css" rel="stylesheet" />
@@ -47,7 +47,7 @@
 			</div>
 		</div>
 		
-		<h2>Examples</h2>
+		<h2>Options</h2>
 		<hr />
 		
 		<div class="textSection fulldiv">
@@ -60,12 +60,10 @@
 				<span id="test1" class="testBar">25</span>	
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
-				<div class="codeBlock">
+			<div class="codeBlock">
 				<span class="codeHeader">jQuery</span>
 				<code>
-					&lt;script&gt;<br />
-					&nbsp;$('#bar').barIndicator();<br />
-					&lt;/script&gt;
+					$('#bar').barIndicator();
 				</code>
 			</div>
 			</div>
@@ -77,13 +75,11 @@
 				<span id="test2" class="testBar">25</span>	
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
-				<div class="codeBlock">
+			<div class="codeBlock">
 				<span class="codeHeader">jQuery</span>
 				<code>
-					&lt;script&gt;<br />
-					&nbsp;var opt = { style:'vertical' };
-					&nbsp;$('#bar').barIndicator(opt);<br />
-					&lt;/script&gt;
+					var opt = { style:'vertical' };
+					$('#bar').barIndicator(opt);
 				</code>
 			</div>
 			</div>
@@ -95,13 +91,11 @@
 				<span id="test3" class="testBar">25</span>	
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
-				<div class="codeBlock">
+			<div class="codeBlock">
 				<span class="codeHeader">jQuery</span>
 				<code>
-					&lt;script&gt;<br />
-					&nbsp;var opt = { horBarHeight:30 };
-					&nbsp;$('#bar').barIndicator(opt);<br />
-					&lt;/script&gt;
+					var opt = { horBarHeight:30 };
+					$('#bar').barIndicator(opt);
 				</code>
 			</div>
 			</div>
@@ -113,16 +107,14 @@
 				<span id="test4" class="testBar">25</span>	
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
-				<div class="codeBlock">
+			<div class="codeBlock">
 				<span class="codeHeader">jQuery</span>
 				<code>
-					&lt;script&gt;<br />
-					&nbsp;var opt = {<br />
-					&nbsp;&nbsp;horBarHeight:30,<br />
-					&nbsp;&nbsp;foreColor:'#e25a48'<br />
-					&nbsp;};<br />
-					&nbsp;$('#bar').barIndicator(opt);<br />
-					&lt;/script&gt;
+					var opt = {<br />
+					&nbsp;horBarHeight:30,<br />
+					&nbsp;foreColor:'#e25a48'<br />
+					};<br />
+					$('#bar').barIndicator(opt);
 				</code>
 			</div>
 			</div>
@@ -134,17 +126,15 @@
 				<span id="test5" class="testBar">25</span>	
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
-				<div class="codeBlock">
+			<div class="codeBlock">
 				<span class="codeHeader">jQuery</span>
 				<code>
-					&lt;script&gt;<br />
-					&nbsp;var opt = {<br />
-					&nbsp;&nbsp;horBarHeight:30,<br />
-					&nbsp;&nbsp;foreColor:'#e25a48',<br />
-					&nbsp;&nbsp;backColor:'rgb(126,196,107)'<br />
-					&nbsp;};<br />
-					&nbsp;$('#bar').barIndicator(opt);<br />
-					&lt;/script&gt;
+					var opt = {<br />
+					&nbsp;horBarHeight:30,<br />
+					&nbsp;foreColor:'#e25a48',<br />
+					&nbsp;backColor:'rgb(126,196,107)'<br />
+					};<br />
+					$('#bar').barIndicator(opt);
 				</code>
 			</div>
 			</div>
@@ -158,15 +148,13 @@
 				<span id="test8" class="testBar">25</span>
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
-				<div class="codeBlock">
+			<div class="codeBlock">
 				<span class="codeHeader">jQuery</span>
 				<code>
-					&lt;script&gt;<br />
-					&nbsp;var opt = {<br />
-					&nbsp;&nbsp;horLabelPos:'topRight' <i>//'left'/'right'</i><br />
-					&nbsp;};<br />
-					&nbsp;$('#bar').barIndicator(opt);<br />
-					&lt;/script&gt;
+					var opt = {<br />
+					&nbsp;horLabelPos:'topRight' <i>//'left'/'right'</i><br />
+					};<br />
+					$('#bar').barIndicator(opt);
 				</code>
 			</div>
 			</div>
@@ -178,17 +166,226 @@
 				<span id="test9" class="testBar">25</span>	
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
-				<div class="codeBlock">
+			<div class="codeBlock">
 				<span class="codeHeader">jQuery</span>
 				<code>
-					&lt;script&gt;<br />
-					&nbsp;var opt = {<br />
-					&nbsp;&nbsp;horTitle:'This is a sample title'<br />
-					&nbsp;};<br />
-					&nbsp;$('#bar').barIndicator(opt);<br />
-					&lt;/script&gt;
+					var opt = {<br />
+					&nbsp;horTitle:'This is a sample title'<br />
+					};<br />
+					$('#bar').barIndicator(opt);
 				</code>
 			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar color range <code>colorRange</code></h3>
+				<div class="secInner-comments">
+					Set 'colorRange' option to true. The plugin holds it's default color limits.
+				</div>
+				<span id="test10" class="testBar testBar1">25</span>	
+				<span id="test11" class="testBar testBar1">55</span>
+				<span id="test12" class="testBar testBar1">95</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;colorRange:true<br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Custom color range<br /><code>colorRange</code> + <code>colorRangeLimits</code></h3>
+				<div class="secInner-comments">
+					Provide a custom object that holds your custom color limits.
+				</div>
+				<span id="test13" class="testBar testBar2">15</span>	
+				<span id="test14" class="testBar testBar2">35</span>
+				<span id="test15" class="testBar testBar2">45</span>
+				<span id="test15" class="testBar testBar2">80</span>
+				<span id="test15" class="testBar testBar2">95</span>				
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;colorRange:true<br />
+					&nbsp;colorRangeLimits: {<br />
+					&nbsp;&nbsp;optimal: '0-20',<br />
+					&nbsp;&nbsp;newRangeOne: '21-40-#4aa64f',<br />
+					&nbsp;&nbsp;newRangeTwo: '41-60-green',<br />
+					&nbsp;&nbsp;newRangeThree: '61-90-rgb(241,144,40)',<br />
+					&nbsp;&nbsp;critical: '91-100'<br />					
+					&nbsp;}<br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Absolute numbers<br /> <code>numType</code> + <code>numMin</code> + <code>numMax</code></h3>
+				<div class="secInner-comments">
+					Set the type of number to 'absolute'.<br /> 
+					Also, set a minimum and maximum limit.
+				</div>
+				<span id="test16" class="testBar">150</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">HTML</span>
+					<code>
+						&lt;span id="bar"&gt;150&lt;/span&gt;<br />
+					</code>
+				</div>
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;numType:'absolute',<br />					
+						&nbsp;numMin:0,<br />
+						&nbsp;numMax:250<br />
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Milestones <code>milestones</code></h3>
+				<div class="secInner-comments">
+					Provide an object that holds your custom milestone points.
+				</div>
+				<span id="test17" class="testBar">25</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">				
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;milestones: {<br />
+						&nbsp;&nbsp;1: {<br />
+						&nbsp;&nbsp;&nbsp;mlPos: 20,<br />
+						&nbsp;&nbsp;&nbsp;mlId: false,<br />
+						&nbsp;&nbsp;&nbsp;mlClass: 'bi-custom',<br />
+						&nbsp;&nbsp;&nbsp;mlDim: '200%',<br />
+						&nbsp;&nbsp;&nbsp;mlLabel: 'Milestone one',<br />
+						&nbsp;&nbsp;&nbsp;mlLabelVis: 'hover',<br />	 
+						&nbsp;&nbsp;&nbsp;mlHoverRange: 15,<br />	
+						&nbsp;&nbsp;&nbsp;mlLineWidth: 1<br />	
+						&nbsp;&nbsp;},<br />
+						&nbsp;&nbsp;2: {<br />
+						&nbsp;&nbsp;&nbsp;mlPos: 60,<br />
+						&nbsp;&nbsp;&nbsp;mlId: false,<br />
+						&nbsp;&nbsp;&nbsp;mlClass: 'bi-custom',<br />
+						&nbsp;&nbsp;&nbsp;mlDim: '200%',<br />
+						&nbsp;&nbsp;&nbsp;mlLabel: 'Milestone two',<br />
+						&nbsp;&nbsp;&nbsp;mlLabelVis: 'hover',<br />	 
+						&nbsp;&nbsp;&nbsp;mlHoverRange: 15,<br />	
+						&nbsp;&nbsp;&nbsp;mlLineWidth: 1<br />	
+						&nbsp;&nbsp;}<br />
+						&nbsp;}<br />
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<h2>Methods</h2>
+		<hr />
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Reanimate <code>reanimateBar</code></h3>
+				<div class="secInner-comments">
+					Call this method if you want to execute the loading animation on demand.
+				</div>
+				<span id="test18" class="testBar">85</span>
+				<div class="secInner-btn">
+					<button id="reanimateBtn">Reanimate</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the method on click</i>
+						$('#reanimateBtn').on('click', function() {<br />
+						&nbsp;bar.barIndicator('reanimateBar');<br />
+						});
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Load new data <code>loadNewData</code></h3>
+				<div class="secInner-comments">
+					Call this method if you want to load new data on demand.
+				</div>
+				<span id="test19" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="loadDataBtn">Load data</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the method on click</i>
+						$('#reanimateBtn').on('click', function() {<br />
+						&nbsp;var newData = 85;<br />
+						&nbsp;bar.barIndicator('loadNewData', [newData]);<br />
+						});
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Destroy <code>destroy</code></h3>
+				<div class="secInner-comments">
+					Call this method if you want to disable the plugin and remove all it's data.
+				</div>
+				<span id="test20" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="destroyBtn">Destroy</button>
+					<button id="initBtn" class="hidden">Initialize</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the method on click</i>
+						$('#reanimateBtn').on('click', function() {<br />
+						&nbsp;var newData = 85;<br />
+						&nbsp;bar.barIndicator('loadNewData', [newData]);<br />
+						});
+					</code>
+				</div>
 			</div>
 		</div>
 				

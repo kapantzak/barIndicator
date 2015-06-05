@@ -51,6 +51,78 @@ $(document).ready(function() {
 		horTitle:'This is a sample title'
 	}
 	$('#test9').barIndicator(opt9);
+	//#10
+	var opt10 = {
+		colorRange:true
+	}
+	$('.testBar1').barIndicator(opt10);
+	//#11
+	var opt11 = {
+		colorRange:true,
+		colorRangeLimits: {
+			optimal: '0-20',
+			newRangeOne: '21-40-#4aa64f',
+			newRangeTwo: '41-60-green',
+			newRangeThree: '61-90-rgb(241,144,40)',
+			critical: '91-100'
+		}
+	}
+	$('.testBar2').barIndicator(opt11);
+	//#12
+	var opt12 = {
+		numType:'absolute',
+		numMin:0,
+		numMax:250
+	}
+	$('#test16').barIndicator(opt12);
+	//#13
+	var opt13 = {
+		milestones: {
+			1: {
+				mlPos: 20,
+				mlId: false,
+				mlClass: 'bi-custom',
+				mlDim: '200%',
+				mlLabel: 'Milestone one',
+				mlLabelVis: 'hover',	 
+				mlHoverRange: 15,	
+				mlLineWidth: 1	
+			},
+			2: {
+				mlPos: 60,
+				mlId: false,
+				mlClass: 'bi-custom',
+				mlDim: '200%',
+				mlLabel: 'Milestone two',
+				mlLabelVis: 'hover',	 
+				mlHoverRange: 15,	
+				mlLineWidth: 1	
+			}
+		}
+	}
+	$('#test17').barIndicator(opt13);
+	//#14
+	var bar18 = $('#test18'); 
+	bar18.barIndicator();
+	$('#reanimateBtn').on('click', function() {
+		bar18.barIndicator('reanimateBar');
+	});
+	//#15
+	var bar19 = $('#test19');
+	bar19.barIndicator();
+	$('#loadDataBtn').on('click', function() {
+		var data = 85;
+		bar19.barIndicator('loadNewData', [data]);
+	});
+	//#16
+	var bar20 = $('#test20');
+	bar20.barIndicator();
+	$('#destroyBtn').on('click', function() {
+		bar20.barIndicator('destroy');
+	});
+	$('#initBtn').on('click', function() {
+		bar20.barIndicator();
+	});
 });
 
 var setGoTop = function() {

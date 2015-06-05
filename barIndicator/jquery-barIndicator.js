@@ -238,6 +238,7 @@
 					that: that,
 					target: num
 				}
+				
 				if (event == 'load') {
 					$(window).load(function() {
 						Plugin.prototype._animateBar.apply(this, [paramsAnim]);
@@ -277,12 +278,13 @@
 					var lbNum = num;
 					var min = opt.numMin;
 					var max = opt.numMax;
-					var barLength = num / (max - min) + '%';
+					var barLength = (num / (max - min)) * 100 + '%';
 				}
 				var lengthObj = {
 					lbNum: lbNum,
 					barLength: barLength
 				};
+				
 				return lengthObj;
 			}
 		},
@@ -371,10 +373,11 @@
 				var countTime = opt.animTime;
 				var decim = opt.lbDecimals;
 				var step = opt.counterStep;
+				var type = opt.numType; 
 				
-				if (opt.numType == 'percent') {
+				if (type == 'percent') {
 					var sign = '%';
-				} else if (type == 'absolute') {
+				} else if (type == 'absolute') {					
 					var sign = '';
 				}
 				var i = parseFloat(min);
@@ -831,11 +834,5 @@
 			Plugin.prototype._setAvgMilestone.apply(this, [paramsAvg]);
 		});
 	});
-	
-	//TODO ------------------------------------------------------------------------------------------------------ //
-	// 1) Milestones --> OK
-	// 2) Average (milestones) of groups etc --> TODO option: getAverage
-	// 3) Reanimate bar via new method --> OK
-	// 4) Title (already added data-title) --> OK
-	
+		
 })(jQuery, window, document);
