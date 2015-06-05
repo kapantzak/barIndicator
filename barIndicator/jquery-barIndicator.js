@@ -145,6 +145,13 @@
 				}
 			}
 			
+			//ColorRange
+			var paramsColorRange = {
+				that: that,
+				num: num
+			}
+			var lengthObj = Plugin.prototype._getColorRangeClass.apply(this, [paramsColorRange]);
+			
 			//Apply colours (if set in options)
 			var foreColor = opt.foreColor;
 			var backColor = opt.backColor;
@@ -167,13 +174,6 @@
 					bi_label.css({'color':lColor});
 				}
 			}
-			
-			//ColorRange
-			var paramsColorRange = {
-				that: that,
-				num: num
-			}
-			var lengthObj = Plugin.prototype._getColorRangeClass.apply(this, [paramsColorRange]);
 			
 			//Set label visibility and position (hover)
 			switch (opt.labelVisibility) {
@@ -831,5 +831,11 @@
 			Plugin.prototype._setAvgMilestone.apply(this, [paramsAvg]);
 		});
 	});
+	
+	//TODO ------------------------------------------------------------------------------------------------------ //
+	// 1) Milestones --> OK
+	// 2) Average (milestones) of groups etc --> TODO option: getAverage
+	// 3) Reanimate bar via new method --> OK
+	// 4) Title (already added data-title) --> OK
 	
 })(jQuery, window, document);

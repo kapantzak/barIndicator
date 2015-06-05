@@ -1,0 +1,135 @@
+body { 
+	font-family: 'Open Sans', sans-serif;
+	font-size: 16px;
+	background-color:#f1f1f1;
+}
+.hidden { display:none }
+hr { 
+	border:0;
+	background-color:#d8d8d8;
+	height:2px;
+}
+.fullDiv {
+	width: 100%;
+}
+.codeBlock {
+	width:100%;
+	margin:10px 0;
+}
+.codeHeader {
+	width:100%;
+	display:inline-block;
+	box-sizing:border-box;
+	padding:10px;
+	background-color:#61a8d8;
+	color:#fff;
+}
+code {
+	width:100%;
+	display:inline-block;
+	padding:15px;
+	box-sizing:border-box;
+	background-color:#555;
+	color:#f1f1f1;
+}
+h3 code {
+	display:inline;
+	font-size:0.8em;
+	padding:5px 7px;
+	background-color:#e1e1e1;
+	color:#555;
+}
+code i {
+	color:#8aec5f
+}
+
+#pluginLogo { }
+
+h1 {	font-size:50px }
+h2 { 
+	font-size:35px; 
+	margin-bottom:10px;
+}
+h3 {
+	font-size:22px;
+	margin-top:10px;
+}
+p { font-size:16px }
+h1,h2,h3,p { font-weight:100 }
+#mainHeader {
+	margin-top:0;
+	margin-bottom:10px;
+}
+
+#main-wrapper {
+	width:900px;
+	margin:0 auto;
+	margin-top:20px;
+	box-shadow:0 0 5px 0 rgba(0,0,0,0.5);
+	padding: 20px;
+	background-color:#fafafa;
+}
+
+.textSection,
+.section {
+	box-sizing:border-box;	
+	margin-top:25px;	
+}
+.section {
+	display:inline-block;
+	padding: 15px;
+	border: 1px solid #d8d8d8; 
+} 
+
+h3.sectionHeader {
+	font-size:20px;
+	font-weight:100;
+	margin-top:0;
+	margin-bottom:20px;
+}
+
+.sectionInner {	
+	display:inline-block;
+	box-sizing:border-box;
+}
+.sectionInner-half {
+	width:50%;
+	float:left;
+}
+.sectionInner-left { padding-right:15px }
+.sectionInner-right { padding-left:15px }
+
+.testBar { margin-bottom:10px }
+
+footer {
+	position:relative;
+	margin-top:30px;
+	padding-top:20px;
+	padding-bottom:10px;
+	text-align:center;
+	border-top:1px solid #d8d8d8;
+}
+#kapa_logo {
+	position:absolute;
+	height: 36px;
+	right: 10px;
+	top: 50%;
+	margin-top:-18px;
+}
+footer i {
+	font-size:14px;
+	color:#777;
+	font-weight:100;
+}
+#goTop {
+	padding:10px 15px;
+	position:fixed;
+	bottom:40px;
+	background-color:#75b0d7;
+	color:#fff;
+	cursor:pointer;
+	display:none;
+}
+#goTop:hover {
+	background-color:#61a8d8;
+}

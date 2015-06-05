@@ -1,0 +1,208 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>kapantzak/barIndicator plugin</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,greek-ext' rel='stylesheet' type='text/css'>
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="barIndicator/css/bi-style.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div id="goTop">Top</div>
+		
+	<div id="main-wrapper">
+	
+		<h1 id="mainHeader"><img id="pluginLogo" src="img/plugin-logo-sm.png" /> Bar Indicator</h1>
+		<h3>A jQuery plugin to visualize numeric data</h3>
+		<hr />
+		
+		<div class="textSection fulldiv">
+			<p>This is a demo page that shows how you can use <strong>barIndicator</strong> plugin.</p>
+			<p>In order to implement it in your site, just copy the <i>barIndicator</i> folder with all it's contents and make links to the <i>bi-style.css</i> and <i>jquery-barIndicator.js</i> files</p>
+			<p><i>Don't forget to include <strong><a href="https://jquery.com/" target="_blank">jQuery</a></strong></i> before the plugin.</p>
+			<p>All you need is a simple html element like a <i>span</i> or a <i>div</i></p>
+			<div class="codeBlock">
+				<span class="codeHeader">HTML</span>
+				<code>
+					&lt;head&gt;<br />
+					&nbsp;&lt;link href="../barIndicator/css/bi-style.css" rel="stylesheet" /&gt;<br />
+					&nbsp;&lt;script src="../jQuery.js"&gt;&lt;/script&gt;<br />
+					&nbsp;&lt;script src="../barIndicator/jquery-barIndicator.js"&gt;&lt;/script&gt;<br />
+					&lt;/head&gt;<br />
+					&lt;body&gt;<br />
+					&nbsp;...<br />
+					&nbsp;&lt;span id="bar"&gt;25&lt;/span&gt;<br />
+					&nbsp;...<br />
+					&lt;/body&gt;<br />
+				</code>
+			</div>
+			<p>And just initialize it!</p>
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;$('#bar').barIndicator();<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+		</div>
+		
+		<h2>Examples</h2>
+		<hr />
+		
+		<div class="textSection fulldiv">
+			<p>For more information about options, methods and events, read the <a href="https://github.com/kapantzak/barIndicator" target="_blank">README</a> file.</p>
+		</div>
+	
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Horizontal (Default)</h3>
+				<span id="test1" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;$('#bar').barIndicator();<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Vertical <code>style</code></h3>
+				<span id="test2" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;var opt = { style:'vertical' };
+					&nbsp;$('#bar').barIndicator(opt);<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar height <code>horBarHeight</code></h3>
+				<span id="test3" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;var opt = { horBarHeight:30 };
+					&nbsp;$('#bar').barIndicator(opt);<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar color <code>foreColor</code></h3>
+				<span id="test4" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;var opt = {<br />
+					&nbsp;&nbsp;horBarHeight:30,<br />
+					&nbsp;&nbsp;foreColor:'#e25a48'<br />
+					&nbsp;};<br />
+					&nbsp;$('#bar').barIndicator(opt);<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar holder color <code>backColor</code></h3>
+				<span id="test5" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;var opt = {<br />
+					&nbsp;&nbsp;horBarHeight:30,<br />
+					&nbsp;&nbsp;foreColor:'#e25a48',<br />
+					&nbsp;&nbsp;backColor:'rgb(126,196,107)'<br />
+					&nbsp;};<br />
+					&nbsp;$('#bar').barIndicator(opt);<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Label position <code>horLabelPos</code></h3>
+				<span id="test6" class="testBar">25</span>
+				<span id="test7" class="testBar">25</span>
+				<span id="test8" class="testBar">25</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;var opt = {<br />
+					&nbsp;&nbsp;horLabelPos:'topRight' <i>//'left'/'right'</i><br />
+					&nbsp;};<br />
+					&nbsp;$('#bar').barIndicator(opt);<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Title <code>horTitle</code></h3>
+				<span id="test9" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;var opt = {<br />
+					&nbsp;&nbsp;horTitle:'This is a sample title'<br />
+					&nbsp;};<br />
+					&nbsp;$('#bar').barIndicator(opt);<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+			</div>
+		</div>
+				
+		<footer>
+			<img id="kapa_logo" src="img/logo_sm.png" alt="logo" />
+			<i>Developed by <a href="mailto:kapantzak@gmail.com" title="kapantzak@gmail.com">John Kapantzakis</a> (c) 2015</i><br />
+			<i>Released under the <a href="barIndicator/LICENSE.txt" target="_blank">MIT License</a></i>			
+		</footer>
+		
+	</div>
+	
+	<script src="scripts/jquery-1.11.2.min.js"></script>	
+	<script src="scripts/jquery.easing.1.3.js"></script>
+	<script src="barIndicator/jquery-barIndicator.js"></script>
+	<script src="scripts/scripts.js"></script>
+</body>
+</html>
