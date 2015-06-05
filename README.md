@@ -377,7 +377,7 @@ Getters are methods that return some data and are **not chainable**. You can cal
     
     var dataObj = $('.myElement').barIndicator('getterName');
 
-#### getPluginData [object]
+#### getPluginData
 
 Returns the data object that the plugin has stored to the affected element. 
 
