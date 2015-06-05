@@ -1,4 +1,4 @@
-# Bar Indicator
+# Bar Indicator ![alt tag](img/plugin-logo-sm.png)
 
 **BarIndicator** is a jQuery plugin that helps you visualize numeric data (percentage or absolute numbers) in to bars.
 
@@ -6,6 +6,7 @@
 
 <ul>
 <li><a href="#installation">Installation</a></li>
+<li><a href="#dep">Dependencies</a></li>
 </ul>
 
 ## <span name="installation">Installation</span> ##
@@ -21,7 +22,7 @@ Just include the `bi-style.css` and `jquery-barIndicator.js` files in your proje
 		....
 	</head>
 
-## Dependencies ##
+## <span name="dep">Dependencies</span> ##
 
 As **Bar Indicator** is a jQuery plugin, you have to include **jQuery** before calling the plugin. 
 
