@@ -58,8 +58,6 @@
 
 /* Limit ------------------------------------------------ */
 .bi-limSpan { display:none}
-.bi-hor-left .bi-limSpan,
-.bi-hor-right .bi-limSpan { display:none!important }
 
 .bi-limSpan {
 	padding:3px 5px;
@@ -74,7 +72,10 @@
 .bi-limSpan-max { background-color:rgb(217, 83, 79) }
 
 .bi-limPos-num .bi-label > .bi-limSpan,
-.bi-limPos-title > .bi-limSpan { display:inline-block }
+.bi-limPos-title > .bi-titleSpan .bi-limSpan { display:inline-block }
+
+.bi-limPos-num.bi-hor-left .bi-label > .bi-limSpan,
+.bi-limPos-num.bi-hor-right .bi-label > .bi-limSpan,
 .bi-limPos-num > .bi-limSpan,
 .bi-limPos-title .bi-label > .bi-limSpan { display:none }
  

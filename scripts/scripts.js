@@ -17,13 +17,11 @@ $(document).ready(function() {
 	$('#test3').barIndicator(opt3);
 	//#4
 	var opt4 = {
-		horBarHeight:30,
 		foreColor:'#e25a48'
 	}
 	$('#test4').barIndicator(opt4);
 	//#5
 	var opt5 = {
-		horBarHeight:30,
 		foreColor:'#e25a48',
 		backColor:'rgb(126,196,107)'
 	}
@@ -127,9 +125,9 @@ $(document).ready(function() {
 	var opt14 = {
 		avgActive: true,
 		lbDecimals: 2,
-		horLabelPos: 'topLeft',
 		horTitle: 'bi-title-id',
-		limLabelPos: 'title',
+		// horLabelPos: 'left',
+		// limLabelPos: 'title',
 		milestones: false		
 	};
 	$('.testBar3').barIndicator(opt14);	

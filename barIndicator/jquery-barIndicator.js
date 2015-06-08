@@ -96,25 +96,24 @@
 				var ttl = opt.horTitle;
 								
 				var label = '<span class="bi-label">' + lbNum + '</span>';
-				var bar = '<div class="bi-bar" style="height:' + bh + 'px"><div class="bi-barInner"></div></div>';				
-				var limSpan = '<span class="bi-limSpan"></span>';
+				var bar = '<div class="bi-bar" style="height:' + bh + 'px"><div class="bi-barInner"></div></div>';	
 								
 				switch (lbPos) {
 					case 'topLeft':
 						var horPosClass = 'bi-hor-topLeft';
-						var inner = label + limSpan + bar;
+						var inner = label + bar;
 						break;
 					case 'topRight':
 						var horPosClass = 'bi-hor-topRight';
-						var inner = label + limSpan + bar;
+						var inner = label + bar;
 						break;
 					case 'left':
 						var horPosClass = 'bi-hor-left';
-						var inner = label + limSpan + bar;
+						var inner = label + bar;
 						break;
 					case 'right':
 						var horPosClass = 'bi-hor-right';
-						var inner = bar + label + limSpan;
+						var inner = bar + label;
 						break;
 				}
 				$el.addClass('bi-horizontal ' + horPosClass);
@@ -130,7 +129,8 @@
 				} else {
 					t = ttl;
 				}
-				var title = '<span class="bi-titleSpan bi-titleSpan-' + lbPos + '">' + t + '</span>';
+				var limSpan = '<span class="bi-limSpan"></span>';
+				var title = '<span class="bi-titleSpan bi-titleSpan-' + lbPos + '">' + t + ' ' + limSpan + '</span>';
 				inner = title + inner;
 			}
 			
@@ -636,7 +636,7 @@
 								} 
 								if (self.attr('data-lbNum').indexOf(numArrMax) != -1 && limMaxVisible == true) {
 									self.addClass('bi-lbNum-max').find('.bi-limSpan').html(limMaxLabel).addClass('bi-limSpan-max');									
-								}								
+								}	
 								if (limLabelPos == 'num') {
 									elem.addClass('bi-limPos-num');
 								} else if (limLabelPos == 'title') {
