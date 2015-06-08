@@ -390,6 +390,25 @@ A method call is **chainable**. This means that you can call a plugin's method a
 
     $('.myElement').barIndicator('methodName', [params]).addClass('newClass');
 
+#### reanimateBar
+
+Call this method if you want to execute the loading animation on demand.
+
+    $('.myElement').barIndicator('reanimateBar');
+
+#### loadNewData
+
+Call this method if you want to load new data on demand. Accepts the new data as a parameter (`data`)
+
+	var data = 85; //Any number
+	$('.myElement').barIndicator('loadNewData', [data]);
+
+#### destroy
+
+Call this method if you want to disable the plugin and remove all of it's data.
+
+	$('.myElement').barIndicator('destroy');
+
 
 ## Getters ##
 
@@ -401,6 +420,12 @@ Getters are methods that return some data and are **not chainable**. You can cal
 #### getPluginData
 
 Returns the data object that the plugin has stored to the affected element. 
+
+	//Initialize
+	$('.myElement').barIndicator();
+	//Call the getter and store it's value to a variable
+	var storedData = $('.myElement').barIndicator('getPluginData');
+	console.log(storedData);	
 
 ## Events ##
 
