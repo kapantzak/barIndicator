@@ -305,6 +305,61 @@
 			</div>
 		</div>
 		
+		<h2 class="subHeader">Average calculation</h2>
+		<hr />
+		
+		<div class="textSection fulldiv">
+			<p><strong>Bar Indicator</strong> gives you the option to calculate and display the average amount of a group of numbers.</p>
+			<p>Assuming that you have a group of elements and each of them represents one of the seven continents of Earth. Let's say that you want to display the percent of landmass of each continent relatively to the total landmass.</p>
+			<p>You have to tell the plugin which of the provided elements are included in the average calculation. In order to do that, you have to set the <pre>data-avgClass</pre> attribute and give a common value to those elements that belong to the same group.</p>
+		</div>
+		
+		<div class="codeBlock">
+			<span class="codeHeader">HTML</span>
+			<code>
+				&lt;span id="africa" class="contBar" data-avgClass="continent"&gt;20.3&lt;/span&gt;<br />
+				&lt;span id="antarctica" class="contBar" data-avgClass="continent"&gt;9.2&lt;/span&gt;<br />
+				&lt;span id="asia" class="contBar" data-avgClass="continent"&gt;29.4&lt;/span&gt;<br />
+				&lt;span id="australia" class="contBar" data-avgClass="continent"&gt;5.9&lt;/span&gt;<br />
+				&lt;span id="europe" class="contBar" data-avgClass="continent"&gt;6.8&lt;/span&gt;<br />
+				&lt;span id="northAmerica" class="contBar" data-avgClass="continent"&gt;16.4&lt;/span&gt;<br />
+				&lt;span id="southAmerica" class="contBar" data-avgClass="continent"&gt;12&lt;/span&gt;<br />
+			</code>
+		</div>
+		
+		<div class="textSection fulldiv">
+			<p>Use <pre>avgActive</pre> option to set average activation to <pre>true</pre></p>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Average <code>avgActive</code> + <code>horTitle</code></h3>
+				<div class="secInner-comments">
+					Set <code>avgActive</code> to <code>true</code> and calculate and display the average amount of the defined group.
+				</div>
+				<span id="africa" class="testBar testBar3" data-avgClass="continent">20.3</span>
+				<span id="antarctica" class="testBar testBar3" data-avgClass="continent">9.2</span>
+				<span id="asia" class="testBar testBar3" data-avgClass="continent">29.4</span>
+				<span id="australia" class="testBar testBar3" data-avgClass="continent">5.9</span>
+				<span id="europe" class="testBar testBar3" data-avgClass="continent">6.8</span>
+				<span id="northAmerica" class="testBar testBar3" data-avgClass="continent">16.4</span>
+				<span id="southAmerica" class="testBar testBar3" data-avgClass="continent">12</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">				
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;avgActive: true,<br />					
+						&nbsp;horTitle: 'bi-title-id',<br />
+						&nbsp;milestones: false
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+			</div>
+		</div>
+		
 		<h2>Methods</h2>
 		<hr />
 		
@@ -365,12 +420,13 @@
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Destroy <code>destroy</code></h3>
 				<div class="secInner-comments">
-					Call this method if you want to disable the plugin and remove all it's data.
+					Call this method if you want to disable the plugin and remove all it's data.<br />
+					In order to reinitialize the plugin on <code>#initBtn</code> click, you have to set <code>forceAnim</code> option to <code>true</code> (check the README file for more information)
 				</div>
 				<span id="test20" class="testBar">35</span>
 				<div class="secInner-btn">
 					<button id="destroyBtn">Destroy</button>
-					<button id="initBtn" class="hidden">Initialize</button>
+					<button id="initBtn" class="">Initialize</button>
 				</div>
 			</div>
 			<div class="sectionInner sectionInner-half sectionInner-right">
@@ -379,10 +435,14 @@
 					<code>
 						var bar = $('#bar');<br /> 
 						bar.barIndicator();<br />
-						<i>//Call the method on click</i>
-						$('#reanimateBtn').on('click', function() {<br />
-						&nbsp;var newData = 85;<br />
-						&nbsp;bar.barIndicator('loadNewData', [newData]);<br />
+						<i>//Call the method on click</i><br />
+						<i>//Destroy</i><br />
+						$('#destroyBtn').on('click', function() {<br />
+						&nbsp;bar.barIndicator('destroy');<br />						
+						});<br />
+						<i>//Reinitialize</i><br />
+						$('#initBtn').on('click', function() {<br />
+						&nbsp;bar.barIndicator({ forceAnim:true });<br />						
 						});
 					</code>
 				</div>

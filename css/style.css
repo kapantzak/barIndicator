@@ -39,6 +39,14 @@ h3 code {
 	background-color:#e1e1e1;
 	color:#555;
 }
+.textSection pre,
+.secInner-comments code {
+	display:inline;
+	font-size:0.8em;
+	padding:3px 5px;
+	background-color:#e1e1e1;
+	color:#555;
+}
 code i {
 	color:#8aec5f
 }
@@ -49,6 +57,9 @@ h1 {	font-size:50px }
 h2 { 
 	font-size:35px; 
 	margin-bottom:10px;
+}
+h2.subHeader {
+	font-size:30px;
 }
 h3 {
 	font-size:22px;

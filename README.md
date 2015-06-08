@@ -251,10 +251,16 @@ The position of the label on **horizontal** style mode.
 
 #### horTitle
 
-You can give a title to the bar block. By default, no title is visible. Feel free to style the title element as you wish by editing the class `.bi-titleSpan` in the css file ( `bi-style.css` )
+By default, no title is visible. You can give a title to the bar block setting one of these options:
+
+- `bi-title-id`: Display the element's id (if set)
+- `bi-data-title`: Display the data-title attribute value (if set)
+- `[string]`: Any title string
+
+Feel free to style the title element as you wish by editing the class `.bi-titleSpan` in the css file ( `bi-style.css` )
 
 > - Default: `false`
-> - Possible values: `[string]` ( *the title string* )
+> - Possible values: `'bi-title-id'` / `bi-data-title` / `[string]` ( *the title string* )
 
 #### numType
 
@@ -327,6 +333,20 @@ This is the event that triggers the animation and the number counter. By default
 
 > - Default: `load`
 > - Possible values: `[string]` ( *the event name* )
+
+#### forceAnim
+
+Set to `true` if you want to trigger the animation instantly (ignores the `triggerEvent` option)
+
+> - Default: `false`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### forceDelay
+
+Delays the animation and takes place only if `forceAnim` option is set to `true`.
+
+> - Default: `100`
+> - Possible values: `[number]`: ( *a number representing milliseconds* )
 
 #### labelNumCount
 

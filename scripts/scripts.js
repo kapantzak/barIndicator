@@ -121,8 +121,15 @@ $(document).ready(function() {
 		bar20.barIndicator('destroy');
 	});
 	$('#initBtn').on('click', function() {
-		bar20.barIndicator();
+		bar20.barIndicator({ forceAnim:true });
 	});
+	//#17
+	var opt14 = {
+		avgActive: true,
+		horTitle: 'bi-title-id',
+		milestones: false
+	};
+	$('.testBar3').barIndicator(opt14);	
 });
 
 var setGoTop = function() {

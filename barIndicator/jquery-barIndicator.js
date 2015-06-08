@@ -120,7 +120,16 @@
 			}
 			
 			if (style == 'horizontal' && ttl != false) {
-				var title = '<span class="bi-titleSpan bi-titleSpan-' + lbPos + '">' + ttl + '</span>';
+				var t = '';
+				if (ttl == 'bi-title-id') {
+					t = $el.attr('id');
+				} else if (ttl == 'bi-data-title') {
+					var dataT = $el.attr('data-title');
+					t = (dataT) ? dataT : 'noTitle';
+				} else {
+					t = ttl;
+				}
+				var title = '<span class="bi-titleSpan bi-titleSpan-' + lbPos + '">' + t + '</span>';
 				inner = title + inner;
 			}
 			
@@ -230,6 +239,8 @@
 			if (opt.animation == true) {
 				var timeOut = opt.timeout;
 				var event = opt.triggerEvent;
+				var forceAnim = opt.forceAnim;
+				var forceDelay = opt.forceDelay;
 				var paramsAnim = {
 					that: that,
 					bl: barLength
@@ -238,21 +249,29 @@
 					that: that,
 					target: num
 				}
-				
-				if (event == 'load') {
-					$(window).load(function() {
-						Plugin.prototype._animateBar.apply(this, [paramsAnim]);
-						if (opt.labelNumCount == true) {
-							Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
-						}
-					});
+				if (forceAnim == false) {
+					if (event == 'load') {
+						$(window).load(function() {
+							Plugin.prototype._animateBar.apply(this, [paramsAnim]);
+							if (opt.labelNumCount == true) {
+								Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
+							}
+						});
+					} else {
+						$(document).on(event, function() {
+							Plugin.prototype._animateBar.apply(this, [paramsAnim]);
+							if (opt.labelNumCount == true) {
+								Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
+							}
+						});
+					}
 				} else {
-					$(document).on(event, function() {
+					setTimeout(function() {
 						Plugin.prototype._animateBar.apply(this, [paramsAnim]);
 						if (opt.labelNumCount == true) {
 							Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
 						}
-					});
+					},forceDelay);					
 				}
 			} else {
 				var style = opt.style;
@@ -335,7 +354,7 @@
 				var tm = opt.timeOut;
 				var bar = that.$el.find('.bi-barInner');
 				var bl = par.bl;
-				
+				console.log('_animateBar');
 				setTimeout(function() {
 					if (style == 'vertical') {
 						if (par.reanim == true) { 
@@ -730,7 +749,8 @@
 			$el.removeData()
 				.empty()
 				.html(orText)
-				.attr('class', orClass);
+				.attr('class', orClass)
+				.removeAttr('data-lbNum');
 		}
 		
 	}
@@ -794,8 +814,10 @@
 		numMax: 100,
 		vertBarWidth: 10,
 		horBarHeight: 10,
-		vertBarHeight: 'line',		
+		vertBarHeight: 'line',			
 		triggerEvent: 'load',	
+		forceAnim: false,
+		forceDelay: 100,
 		labelNumCount: true,	
 		counterStep: 10,		
 		milestones: {
