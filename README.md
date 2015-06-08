@@ -379,6 +379,14 @@ The default object holds only one milestone and looks like this:
 		mlLineWidth: 1	
 	}
 
+#### avgActive
+
+Enable or disable the average amount calculation of grouped elements
+
+#### limLabel
+
+Enable or disable the min / max label indicator of grouped elements
+
 ## Methods ##
 
 

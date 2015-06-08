@@ -70,7 +70,7 @@
 				var w = opt.vertBarWidth;
 				var h = opt.vertBarHeight;
 				var elemH = $el.css('height');
-				var va = opt.vertLabelAlign;
+				var va = opt.vertLabelAlign;				
 				$el.addClass('bi-vertical');
 				
 				if (h == 'line') {
@@ -94,26 +94,27 @@
 				var bh = opt.horBarHeight;
 				var lbPos = opt.horLabelPos;
 				var ttl = opt.horTitle;
-				
+								
 				var label = '<span class="bi-label">' + lbNum + '</span>';
-				var bar = '<div class="bi-bar" style="height:' + bh + 'px"><div class="bi-barInner"></div></div>';
-				
+				var bar = '<div class="bi-bar" style="height:' + bh + 'px"><div class="bi-barInner"></div></div>';				
+				var limSpan = '<span class="bi-limSpan"></span>';
+								
 				switch (lbPos) {
 					case 'topLeft':
 						var horPosClass = 'bi-hor-topLeft';
-						var inner = label + bar;
+						var inner = label + limSpan + bar;
 						break;
 					case 'topRight':
 						var horPosClass = 'bi-hor-topRight';
-						var inner = label + bar;
+						var inner = label + limSpan + bar;
 						break;
 					case 'left':
 						var horPosClass = 'bi-hor-left';
-						var inner = label + bar;
+						var inner = label + limSpan + bar;
 						break;
 					case 'right':
 						var horPosClass = 'bi-hor-right';
-						var inner = bar + label;
+						var inner = bar + label + limSpan;
 						break;
 				}
 				$el.addClass('bi-horizontal ' + horPosClass);
@@ -393,6 +394,7 @@
 				var decim = opt.lbDecimals;
 				var step = opt.counterStep;
 				var type = opt.numType; 
+				var limLabelPos = opt.limLabelPos;
 				
 				if (type == 'percent') {
 					var sign = '%';
@@ -403,7 +405,6 @@
 				var ct = (countTime / (target - i)) * step;
 				label.html(min + sign);
 				function counter() {
-					//console.log(i);
 					setTimeout(function() {
 						label.html(i.toFixed(decim) + sign);					
 						if (i<target) {						
@@ -413,6 +414,12 @@
 								i = target;
 							}						
 							counter();
+						} else {
+							if (limLabelPos == 'num') { 
+								label.html(label.html() + label.closest('.bi-wrp').find('.bi-limSpan').prop('outerHTML'));
+							} else {
+								label.html(label.html());
+							}
 						}
 					},ct);				
 				}	
@@ -583,6 +590,12 @@
 				var avgLabelVis = opt.avgLabelVis;
 				var avgLabelHoverRange = opt.avgLabelHoverRange;
 				var avgLineHeight = opt.avgLineWidth;
+				var lim = opt.limLabel;
+				var limMinLabel = opt.limMinLabel;
+				var limMaxLabel = opt.limMaxLabel;
+				var limMinVisible = opt.limMinVisible;
+				var limMaxVisible = opt.limMaxVisible;
+				var limLabelPos = opt.limLabelPos;
 				
 				//Detect data-avgClass attributes
 				var dtAvgCl = $el.attr('data-avgClass');
@@ -600,6 +613,7 @@
 					if (notInitCount == 1 && elem.length > 1) {
 						var sum = 0;
 						var i = 1;
+						var numArr = [];
 						elem.each(function() {		
 							var that = $(this);
 							if (!that.hasClass('bi-avgCalculated')) {
@@ -607,9 +621,29 @@
 								that.addClass('bi-avgCalculated');							
 								sum += lbNum;
 								i++;	
+								numArr.push(lbNum);
 							}
 						});
 						var avg = sum / (i - 1);
+						if (lim == true) {
+							var numArrSorted = numArr.sort(function(a,b) { return a-b });
+							var numArrMin = numArrSorted[0];
+							var	numArrMax = numArrSorted[numArrSorted.length - 1];
+							elem.each(function() {
+								var self = $(this);
+								if (self.attr('data-lbNum').indexOf(numArrMin) != -1 && limMinVisible == true) {									
+									self.addClass('bi-lbNum-min').find('.bi-limSpan').html(limMinLabel).addClass('bi-limSpan-min');
+								} 
+								if (self.attr('data-lbNum').indexOf(numArrMax) != -1 && limMaxVisible == true) {
+									self.addClass('bi-lbNum-max').find('.bi-limSpan').html(limMaxLabel).addClass('bi-limSpan-max');									
+								}								
+								if (limLabelPos == 'num') {
+									elem.addClass('bi-limPos-num');
+								} else if (limLabelPos == 'title') {
+									elem.addClass('bi-limPos-title');
+								}
+							});
+						}
 						elem.attr('data-biAvg', avg.toFixed(2));	
 						var trigObj = {
 							that: par.that,
@@ -838,10 +872,16 @@
 		avgMlClass: 'bi-average-mlst',
 		avgMlDim: 'inherit',
 		avgLabel: 'Average',
-		avgLabelNum: true,	//if true, the avg amount is visible on the milestone label
-		avgLabelVis: 'hover',	//'hover'|'visible'|'hidden'
-		avgLabelHoverRange: 15,	//[px]
-		avgLineWidth: 1	//[px]
+		avgLabelNum: true,	
+		avgLabelVis: 'hover',	
+		avgLabelHoverRange: 15,	
+		avgLineWidth: 1,
+		limLabel: true,
+		limMinLabel: 'min',
+		limMaxLabel: 'max',
+		limMinVisible: true,
+		limMaxVisible: true,
+		limLabelPos: 'num'	//num / title
 	}
 	
 	$(document).on('bi.dataAvgSet', function(e,a) {		

@@ -56,6 +56,29 @@
 .bi-titleSpan.bi-titleSpan-right { width:100% }
 .bi-titleSpan.bi-titleSpan-right { text-align:right }
 
+/* Limit ------------------------------------------------ */
+.bi-limSpan { display:none}
+.bi-hor-left .bi-limSpan,
+.bi-hor-right .bi-limSpan { display:none!important }
+
+.bi-limSpan {
+	padding:3px 5px;
+	color:#fff;
+	font-size:0.8em;
+	margin: 0 5px;
+	border-radius:3px;
+}
+
+.bi-limSpan-min { background-color:rgb(92, 184, 92) }
+
+.bi-limSpan-max { background-color:rgb(217, 83, 79) }
+
+.bi-limPos-num .bi-label > .bi-limSpan,
+.bi-limPos-title > .bi-limSpan { display:inline-block }
+.bi-limPos-num > .bi-limSpan,
+.bi-limPos-title .bi-label > .bi-limSpan { display:none }
+ 
+
 /* Label ------------------------------------------------ */
 /* Hover */
 .bi-label-vis-hover .bi-label { 

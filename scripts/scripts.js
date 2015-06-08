@@ -126,8 +126,11 @@ $(document).ready(function() {
 	//#17
 	var opt14 = {
 		avgActive: true,
+		lbDecimals: 2,
+		horLabelPos: 'topLeft',
 		horTitle: 'bi-title-id',
-		milestones: false
+		limLabelPos: 'title',
+		milestones: false		
 	};
 	$('.testBar3').barIndicator(opt14);	
 });
