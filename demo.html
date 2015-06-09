@@ -19,7 +19,7 @@
 		<div class="textSection fulldiv">
 			<p>This is a demo page that shows how you can use <strong>barIndicator</strong> plugin.</p>
 			<p>In order to implement it in your site, just copy the <i>barIndicator</i> folder with all it's contents and make links to the <i>bi-style.css</i> and <i>jquery-barIndicator.js</i> files</p>
-			<p><i>Don't forget to include <strong><a href="https://jquery.com/" target="_blank">jQuery</a></strong></i> before the plugin.</p>
+			<p><i>Don't forget to include <strong><a href="https://jquery.com/" target="_blank">jQuery</a></strong> and <strong><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank">easing</a></strong> before the plugin.</i></p>
 			<p>All you need is a simple html element like a <i>span</i> or a <i>div</i></p>
 			<div class="codeBlock">
 				<span class="codeHeader">HTML</span>
@@ -51,7 +51,7 @@
 		<hr />
 		
 		<div class="textSection fulldiv">
-			<p>For more information about options, methods and events, read the <a href="https://github.com/kapantzak/barIndicator" target="_blank">README</a> file.</p>
+			<p>For more information about options, methods and events, check the <a href="https://github.com/kapantzak/barIndicator" target="_blank">README</a> file.</p>
 		</div>
 	
 		<div class="section fullDiv">				
@@ -263,6 +263,32 @@
 		
 		<div class="section fullDiv">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Min/max numbers (labels)<br /> <code>numMinLabel</code> + <code>numMaxLabel</code></h3>
+				<div class="secInner-comments">
+					Enable the minimum / maximum number indicator labels.					
+				</div>
+				<span id="test21" class="testBar">25</span>				
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">				
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;numMinLabel:true,<br />					
+						&nbsp;numMaxLabel:true<br />
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+				<div class="secInner-comments marginTop-md">
+					You can customize the appearance of the labels, either by editing the <code>bi-style.css</code> file, or by passing specific options like <code>numMinLbLeft</code>, <code>numMaxLbRight</code> etc<br /> 
+					(<i>For more details, check the README file</i>)
+				</div>
+			</div>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Milestones <code>milestones</code></h3>
 				<div class="secInner-comments">
 					Provide an object that holds your custom milestone points.
@@ -331,7 +357,7 @@
 		
 		<div class="section fullDiv">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
-				<h3 class="sectionHeader">Average <code>avgActive</code> + <code>horTitle</code></h3>
+				<h3 class="sectionHeader">Average and min/max amounts<br /> <code>avgActive</code> + <code>horTitle</code></h3>
 				<div class="secInner-comments">
 					Set <code>avgActive</code> to <code>true</code> and calculate and display the average amount of the defined group.
 				</div>
@@ -420,7 +446,8 @@
 				<h3 class="sectionHeader">Destroy <code>destroy</code></h3>
 				<div class="secInner-comments">
 					Call this method if you want to disable the plugin and remove all of it's data.<br />
-					In order to reinitialize the plugin on <code>#initBtn</code> click, you have to set <code>forceAnim</code> option to <code>true</code> (check the README file for more information)
+					In order to reinitialize the plugin on <code>#initBtn</code> click, you have to set <code>forceAnim</code> option to <code>true</code><br />
+					(<i>check the README file for more information</i>)
 				</div>
 				<span id="test20" class="testBar">35</span>
 				<div class="secInner-btn">
@@ -447,7 +474,69 @@
 				</div>
 			</div>
 		</div>
-				
+			
+		<h2>Getters</h2>
+		<hr />
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Get plugin data <code>getPluginData</code></h3>
+				<div class="secInner-comments">
+					Call the <code>getPluginData</code> getter and get the <code>barLength</code> property.<br />
+					(<i>check the README file for more information</i>)
+				</div>
+				<span id="test22" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="getPluginDataBtn">Get data</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the getter and store the data in a new variable</i><br />						
+						var data = bar.barIndicator('getPluginData');<br />
+						alert(data.barLength);
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<h2>Events</h2>
+		<hr />
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Events</h3>
+				<div class="secInner-comments">
+					Click the 'Start' button and check the events triggered.<br />
+					As soon as the animation has stoped, the two other buttons will get enabled.
+				</div>
+				<span id="test23" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="initPluginEventBtn">Start</button>
+					<button id="reanimPluginEventBtn" disabled>Reanimate</button>
+					<button id="dataPluginEventBtn" disabled>Load data</button>
+				</div>
+				<ul id="test23-events"></ul>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						$('#initPluginEventBtn').on('click', function() {<br />
+						&nbsp;$(document).on('bi.innerContentAppended', function() {<br />
+						&nbsp;&nbsp;<i>//Call any function on event occurrence</i>
+						&nbsp;});<br />
+						});
+					</code>
+				</div>
+			</div>
+		</div>
+			
 		<footer>
 			<img id="kapa_logo" src="img/logo_sm.png" alt="logo" />
 			<i>Developed by <a href="mailto:kapantzak@gmail.com" title="kapantzak@gmail.com">John Kapantzakis</a> (c) 2015</i><br />

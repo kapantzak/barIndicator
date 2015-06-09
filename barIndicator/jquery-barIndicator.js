@@ -64,7 +64,22 @@
 			});
 			//console.log($.data($el, 'storedAttr'));
 			
-			// Build and get inner html ------------------------------------------------------------------------------------------------- //			
+			// Build and get inner html ------------------------------------------------------------------------------------------------- //
+			var numMin = opt.numMin;
+			var numMax = opt.numMax;
+			var numMinLabel = opt.numMinLabel;
+			var numMaxLabel = opt.numMaxLabel;
+			var numMinLbLeft = (opt.numMinLbLeft != false && !isNaN(opt.numMinLbLeft)) ? opt.numMinLbLeft : '';
+			var numMaxLbRight = (opt.numMaxLbRight != false && !isNaN(opt.numMaxLbRight)) ? opt.numMaxLbRight : '';
+			var numMinLbTop = (opt.numMinLbTop != false && !isNaN(opt.numMinLbTop)) ? opt.numMinLbTop : '';
+			var numMaxLbTop = (opt.numMaxLbTop != false && !isNaN(opt.numMaxLbTop)) ? opt.numMaxLbTop : '';
+			var numLabelEdge = '';
+			if (numMinLabel == true) {
+				numLabelEdge += '<span class="bi-labelEdge bi-edge-min" style="left:' + numMinLbLeft + 'px;top:' + numMinLbTop + 'px">' + numMin + '</span>';
+			}
+			if (numMaxLabel == true) {
+				numLabelEdge += '<span class="bi-labelEdge bi-edge-max" style="right:' + numMaxLbRight + 'px;top:' + numMaxLbTop + 'px">' + numMax + '</span>';
+			}
 			if (style == 'vertical') {	
 				var lb = opt.vertLabelPos;		
 				var w = opt.vertBarWidth;
@@ -82,7 +97,7 @@
 					var bh = h.replace('px','');
 				}
 					
-				var bar = '<div class="bi-bar" style="width:' + w + 'px;height:' + bh + '"><div class="bi-barInner"></div></div>';
+				var bar = '<div class="bi-bar" style="width:' + w + 'px;height:' + bh + '">' + numLabelEdge + '<div class="bi-barInner"></div></div>';
 				if (lb == 'right') {
 					var label = '<span class="bi-label bi-label-r" style="vertical-align:' + va + '">' + lbNum + '</span>';
 					var inner = bar + label;
@@ -96,7 +111,7 @@
 				var ttl = opt.horTitle;
 								
 				var label = '<span class="bi-label">' + lbNum + '</span>';
-				var bar = '<div class="bi-bar" style="height:' + bh + 'px"><div class="bi-barInner"></div></div>';	
+				var bar = '<div class="bi-bar" style="height:' + bh + 'px">' + numLabelEdge + '<div class="bi-barInner"></div></div>';	
 								
 				switch (lbPos) {
 					case 'topLeft':
@@ -416,7 +431,13 @@
 							counter();
 						} else {
 							if (limLabelPos == 'num') { 
-								label.html(label.html() + label.closest('.bi-wrp').find('.bi-limSpan').prop('outerHTML'));
+								var counterLb = label.closest('.bi-wrp').find('.bi-limSpan').prop('outerHTML');
+								if (typeof counterLb != 'undefined') {
+									var cntrLb = counterLb;
+								} else {
+									var cntrLb = '';
+								}
+								label.html(label.html() + cntrLb);
 							} else {
 								label.html(label.html());
 							}
@@ -846,6 +867,12 @@
 		lbDecimals: 0,
 		numMin: 0,
 		numMax: 100,
+		numMinLabel: false,	//Readme
+		numMaxLabel: false,	//Readme
+		numMinLbLeft: false, //Readme
+		numMaxLbRight: false, //Readme
+		numMinLbTop: false, //Readme
+		numMaxLbTop: false, //Readme
 		vertBarWidth: 10,
 		horBarHeight: 10,
 		vertBarHeight: 'line',			

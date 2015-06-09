@@ -56,6 +56,20 @@
 .bi-titleSpan.bi-titleSpan-right { width:100% }
 .bi-titleSpan.bi-titleSpan-right { text-align:right }
 
+/* Edge labels ------------------------------------------ */
+.bi-labelEdge {
+	position:absolute;
+	top:5px;
+	padding:1px 5px;
+	border-radius:3px;
+	font-size:0.8em;
+	background-color:rgba(0,0,0,0.1);
+	color:#555;
+	z-index:1200;
+}
+.bi-edge-min { left:-10px }
+.bi-edge-max { right:-10px }
+
 /* Limit ------------------------------------------------ */
 .bi-limSpan { display:none}
 

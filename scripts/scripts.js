@@ -126,11 +126,64 @@ $(document).ready(function() {
 		avgActive: true,
 		lbDecimals: 2,
 		horTitle: 'bi-title-id',
-		// horLabelPos: 'left',
-		// limLabelPos: 'title',
 		milestones: false		
 	};
 	$('.testBar3').barIndicator(opt14);	
+	//#18
+	var opt15 = {
+		numMinLabel:true,
+		numMaxLabel:true
+	};
+	$('#test21').barIndicator(opt15);
+	//#19
+	var bar22 = $('#test22'); 
+	bar22.barIndicator();
+	var data22 = bar22.barIndicator('getPluginData');
+	$('#getPluginDataBtn').on('click', function() {
+		alert(data22.barLength);
+	});
+	//#20
+	var bar23 = $('#test23'); 	
+	var btn23Reanim = $('#reanimPluginEventBtn');
+	var btn23Data = $('#dataPluginEventBtn');
+	$('#initPluginEventBtn').on('click', function() {		
+		var ul23 = $('#test23-events');	
+		$(document).on('bi.innerContentAppended', function() {
+			ul23.append('<li>bi.innerContentAppended</li>');
+		});
+		$(document).on('bi.milestoneAppended', function() {
+			ul23.append('<li>bi.milestoneAppended</li>');
+		});
+		$(document).on('bi.animationCompleted', function() {
+			ul23.append('<li>bi.animationCompleted</li>');
+			btn23Reanim.prop('disabled', false);
+			btn23Data.prop('disabled', false);
+		});
+		$(document).on('bi.reanimateBarStart', function() {
+			ul23.append('<li>bi.reanimateBarStart</li>');
+		});
+		$(document).on('bi.reanimateBarStop', function() {
+			ul23.append('<li>bi.reanimateBarStop</li>');
+		});
+		$(document).on('bi.loadDataStart', function() {
+			ul23.append('<li>bi.loadDataStart</li>');
+		});
+		$(document).on('bi.loadDataStop', function() {
+			ul23.append('<li>bi.loadDataStop</li>');
+		});
+		var opt16 = {
+			animTime:1500,
+			forceAnim:true
+		}
+		bar23.barIndicator(opt16);			
+	});	
+	btn23Reanim.on('click', function() {
+		bar23.barIndicator('reanimateBar');
+	});
+	var newData23 = 80;
+	btn23Data.on('click', function() {
+		bar23.barIndicator('loadNewData', [newData23]);
+	});
 });
 
 var setGoTop = function() {
