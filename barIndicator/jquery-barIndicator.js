@@ -370,7 +370,6 @@
 				var tm = opt.timeOut;
 				var bar = that.$el.find('.bi-barInner');
 				var bl = par.bl;
-				console.log('_animateBar');
 				setTimeout(function() {
 					if (style == 'vertical') {
 						if (par.reanim == true) { 
@@ -682,6 +681,9 @@
 				var $el = par.$el;
 				var opt = that.opt;
 				var mlst = opt.milestones;
+				var avgColorIndicator = opt.avgColorIndicator;
+				var avgColorBelowAvg = opt.avgColorBelowAvg;
+				var avgColorAboveAvg = opt.avgColorAboveAvg;
 				var avgAttr = $el.attr('data-biAvg');
 				if (avgAttr && avgAttr.length > 0) {
 					var avg = parseFloat(avgAttr);
@@ -698,6 +700,23 @@
 						}
 					};
 					var mlstObj = $.extend({}, mlst, avgObj);
+					if (avgColorIndicator == true) {
+						var innerBar = $el.find('.bi-barInner');
+						var lbNum = $el.attr('data-lbnum');						
+						if (parseFloat(lbNum) > avg) {
+							$el.addClass('bi-avgAbove');
+							if (avgColorAboveAvg != false) {
+								var colAbove = Plugin.prototype._getColorValue.apply(this, [avgColorAboveAvg]);
+								innerBar.css({'background-color':colAbove});
+							}
+						} else {
+							$el.addClass('bi-avgBelow');
+							if (avgColorBelowAvg != false) {
+								var colBelow = Plugin.prototype._getColorValue.apply(this, [avgColorBelowAvg]);
+								innerBar.css({'background-color':colBelow});
+							}
+						}
+					}
 				} else {
 					var mlstObj = mlst;
 				}				
@@ -716,7 +735,6 @@
 		getPluginData: function() {			
 			var $el = this.$el;
 			var pluginData = $.data($el,'storedAttr');
-			console.log(pluginData);
 			return pluginData;
 		},
 		
@@ -894,7 +912,9 @@
 			}
 		},
 		avgActive: false,
-		avgGroupClass: '',
+		avgColorIndicator: false,	//Readme
+		avgColorBelowAvg: false,
+		avgColorAboveAvg: false,
 		avgMlId: false,
 		avgMlClass: 'bi-average-mlst',
 		avgMlDim: 'inherit',

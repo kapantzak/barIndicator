@@ -155,6 +155,7 @@ h3.sectionHeader {
 	background-color:#f4f4f4;
 	margin-bottom:20px;
 	font-weight:100;
+	line-height: 1.7;
 }
 .secInner-btn button {
 	border:none;

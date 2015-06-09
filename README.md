@@ -381,7 +381,14 @@ The default object holds only one milestone and looks like this:
 
 #### avgActive
 
-Enable or disable the average amount calculation of grouped elements
+Enable or disable the average amount calculation of grouped elements. 
+
+In order for the average calculator to work, you have to provide `data-avgClass` attribute to every element you want to be calculated in a group.
+
+For example, you might have 10 elements but you want to devide them into two smaller groups. You can give `data-avgClass="groupOne"` to the first 5 elements and `data-avgClass="groupTwo"` to the last 5 of them.
+
+> - Default: `false`
+> - Possible values: `[boolean]`: `true` / `false`
 
 #### limLabel
 

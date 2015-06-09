@@ -391,12 +391,17 @@
 					<code>
 						var opt = {<br />
 						&nbsp;avgActive: true,<br />
+						&nbsp;avgColorIndicator: true,<br />
 						&nbsp;lbDecimals: 2,<br />						
 						&nbsp;horTitle: 'bi-title-id',<br />
 						&nbsp;milestones: false<br />
 						};<br />
 						$('#bar').barIndicator(opt);
 					</code>
+				</div>
+				<div class="secInner-comments marginTop-md">
+					If you set <code>avgColorIndicator</code> to <code>true</code>, every bar that is above the average will be red and every bar that is below the average will get green.<br />
+					You can change those colours either in <code>bi-style.css</code> or by giving the <code>avgColorBelowAvg</code> and <code>avgColorAboveAvg</code> options, a valid colour value.
 				</div>
 			</div>
 		</div>

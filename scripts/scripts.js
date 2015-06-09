@@ -125,6 +125,7 @@ $(document).ready(function() {
 	//#17
 	var opt14 = {
 		avgActive: true,
+		avgColorIndicator: true,
 		lbDecimals: 2,
 		horTitle: 'bi-title-id',
 		milestones: false		

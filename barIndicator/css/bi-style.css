@@ -159,6 +159,11 @@
 .bi-wrp.bi-default-theme.bi-cRange-optimal .bi-barInner { background-color:rgb(92, 184, 92) }
 .bi-wrp.bi-default-theme.bi-cRange-alert .bi-barInner { background-color:rgb(217, 170, 79) }
 .bi-wrp.bi-default-theme.bi-cRange-critical .bi-barInner { background-color:rgb(217, 83, 79) }
+
+/* (Default) Bar color according to average */
+.bi-wrp.bi-default-theme.bi-avgBelow .bi-barInner { background-color:rgb(92, 184, 92) }
+.bi-wrp.bi-default-theme.bi-avgAbove .bi-barInner { background-color:rgb(217, 83, 79) }
+
 /* (Default) Milestones */
 .bi-wrp.bi-default-theme .bi-milestone {
 	background-color:transparent;
