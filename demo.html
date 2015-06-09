@@ -18,6 +18,22 @@
 		
 		<div class="textSection fulldiv">
 			<p>This is a demo page that shows how you can use <strong>barIndicator</strong> plugin.</p>
+			<p>				
+				<div id="contents" class="cont-expanded">
+					<h3><span>Contents</span><span id="cont-toggle">-<span></h3>
+					<div class="contentsInner">
+						<div id="cont-options" class="contInnerSec">
+							<h3>Options</h3>
+						</div>
+						<div id="cont-methods" class="contInnerSec">
+							<h3>Methods + Getters</h3>
+						</div>
+						<div id="cont-events" class="contInnerSec">
+							<h3>Events</h3>
+						</div>
+					</div>
+				</div>
+			</p>
 			<p>In order to implement it in your site, just copy the <i>barIndicator</i> folder with all it's contents and make links to the <i>bi-style.css</i> and <i>jquery-barIndicator.js</i> files</p>
 			<p><i>Don't forget to include <strong><a href="https://jquery.com/" target="_blank">jQuery</a></strong> and <strong><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank">easing</a></strong> before the plugin.</i></p>
 			<p>All you need is a simple html element like a <i>span</i> or a <i>div</i></p>
@@ -54,7 +70,7 @@
 			<p>For more information about options, methods and events, check the <a href="https://github.com/kapantzak/barIndicator" target="_blank">README</a> file.</p>
 		</div>
 	
-		<div class="section fullDiv">				
+		<div id="sec-horizontal" class="section fullDiv secOpt" data-content="Horizontal">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Horizontal (Default)</h3>
 				<span id="test1" class="testBar">25</span>	
@@ -69,7 +85,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-vertical" class="section fullDiv secOpt" data-content="Vertical">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Vertical <code>style</code></h3>
 				<span id="test2" class="testBar">25</span>	
@@ -85,7 +101,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-barHeight" class="section fullDiv secOpt" data-content="Bar height">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Bar height <code>horBarHeight</code></h3>
 				<span id="test3" class="testBar">25</span>	
@@ -101,7 +117,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-barColor" class="section fullDiv secOpt" data-content="Bar color">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Bar color <code>foreColor</code></h3>
 				<span id="test4" class="testBar">25</span>	
@@ -119,7 +135,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-backColor" class="section fullDiv secOpt" data-content="Background color">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Bar holder color <code>backColor</code></h3>
 				<span id="test5" class="testBar">25</span>	
@@ -138,7 +154,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-lbPos" class="section fullDiv secOpt" data-content="Label position">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Label position <code>horLabelPos</code></h3>
 				<span id="test6" class="testBar">25</span>
@@ -158,7 +174,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-title" class="section fullDiv secOpt" data-content="Title">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Title <code>horTitle</code></h3>
 				<span id="test9" class="testBar">25</span>	
@@ -176,7 +192,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-colorRange" class="section fullDiv secOpt" data-content="Color range">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Bar color range <code>colorRange</code></h3>
 				<div class="secInner-comments">
@@ -199,7 +215,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-custColorRange" class="section fullDiv secOpt" data-content="Custom color range">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Custom color range<br /><code>colorRange</code> + <code>colorRangeLimits</code></h3>
 				<div class="secInner-comments">
@@ -231,7 +247,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-absNumber" class="section fullDiv secOpt" data-content="Absolute numbers">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Absolute numbers<br /> <code>numType</code> + <code>numMin</code> + <code>numMax</code></h3>
 				<div class="secInner-comments">
@@ -261,7 +277,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-numLb" class="section fullDiv secOpt" data-content="Min/Max labels">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Min/max numbers (labels)<br /> <code>numMinLabel</code> + <code>numMaxLabel</code></h3>
 				<div class="secInner-comments">
@@ -287,7 +303,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-milestones" class="section fullDiv secOpt" data-content="Milestones">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Milestones <code>milestones</code></h3>
 				<div class="secInner-comments">
@@ -329,7 +345,7 @@
 			</div>
 		</div>
 		
-		<h2 class="subHeader">Average calculation</h2>
+		<h2 id="sec-avgCalc" class="subHeader secOpt secOptImportant" data-content="Average">Average calculation</h2>
 		<hr />
 		
 		<div class="textSection fulldiv">
@@ -388,7 +404,7 @@
 		<h2>Methods</h2>
 		<hr />
 		
-		<div class="section fullDiv">				
+		<div id="sec-reanimate" class="section fullDiv secMethods" data-content="Reanimate">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Reanimate <code>reanimateBar</code></h3>
 				<div class="secInner-comments">
@@ -414,7 +430,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-loadData" class="section fullDiv secMethods" data-content="Load data">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Load new data <code>loadNewData</code></h3>
 				<div class="secInner-comments">
@@ -441,7 +457,7 @@
 			</div>
 		</div>
 		
-		<div class="section fullDiv">				
+		<div id="sec-destroy" class="section fullDiv secMethods" data-content="Destroy">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Destroy <code>destroy</code></h3>
 				<div class="secInner-comments">
@@ -478,7 +494,7 @@
 		<h2>Getters</h2>
 		<hr />
 		
-		<div class="section fullDiv">				
+		<div id="sec-getPluginData" class="section fullDiv secMethods" data-content="Get plugin data (getter)">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Get plugin data <code>getPluginData</code></h3>
 				<div class="secInner-comments">
@@ -507,7 +523,7 @@
 		<h2>Events</h2>
 		<hr />
 		
-		<div class="section fullDiv">				
+		<div id="sec-events" class="section fullDiv secEvents" data-content="Events">				
 			<div class="sectionInner sectionInner-half sectionInner-left">
 				<h3 class="sectionHeader">Events</h3>
 				<div class="secInner-comments">

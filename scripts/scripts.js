@@ -2,6 +2,7 @@ $(document).ready(function() {
 	
 	setGoTop();
 	toggleGoTop();
+	buildContents();
 	
 	//#1
 	$('#test1').barIndicator();
@@ -186,6 +187,31 @@ $(document).ready(function() {
 	});
 });
 
+var buildContents = function() {
+	var optHolder = $('#cont-options');
+	var methodHolder = $('#cont-methods');
+	var eventHolder = $('#cont-events');
+	
+	$('.secOpt').each(function() {
+		var that = $(this);
+		var id = that.attr('id');
+		var txt = that.attr('data-content');
+		optHolder.append('<a class="contAnchor" href="#' + id + '">' + txt + '</a>');
+	});
+	$('.secMethods').each(function() {
+		var that = $(this);
+		var id = that.attr('id');
+		var txt = that.attr('data-content');
+		methodHolder.append('<a class="contAnchor" href="#' + id + '">' + txt + '</a>');
+	});
+	$('.secEvents').each(function() {
+		var that = $(this);
+		var id = that.attr('id');
+		var txt = that.attr('data-content');
+		eventHolder.append('<a class="contAnchor" href="#' + id + '">' + txt + '</a>');
+	});
+}
+
 var setGoTop = function() {
 	var gt = $('#goTop');
 	var w = $(window).width();
@@ -203,6 +229,18 @@ var toggleGoTop = function() {
 		gt.hide();
 	}
 }
+
+$(document).on('click', '#cont-toggle', function() {
+	var that = $(this);
+	var cont = $('#contents');
+	if (cont.hasClass('cont-expanded')) {
+		that.html('+');
+		cont.removeClass('cont-expanded').addClass('cont-collapsed');
+	} else if (cont.hasClass('cont-collapsed')) {
+		that.html('-');
+		cont.addClass('cont-expanded').removeClass('cont-collapsed');
+	}
+});
 
 $('#goTop').on('click', function() {
 	$('body,html').animate({scrollTop:0},350,'easeOutExpo');	
