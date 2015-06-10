@@ -300,10 +300,51 @@ For example, you might want to display the temperature, so you can set this opti
 > - Default: `100`
 > - Possible values: `[number]`
 
+#### numMinLabel
+
+Enable or disable the starting point label of the bar.
+
+> - Default: `false`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### numMaxLabel
+
+Enable or disable the ending point label of the bar.
+
+> - Default: `false`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### numMinLbLeft
+
+Set the `left` position of the minimum label.
+
+> - Default: `false`
+> - Possible values: `false` / `[number]` ( *The desired left position in pixels* )
+
+#### numMaxLbRight
+
+Set the `right` position of the maximum label.
+
+> - Default: `false`
+> - Possible values: `false` / `[number]` ( *The desired right position in pixels* )
+
+#### numMinLbTop
+
+Set the `top` position of the minimum label.
+
+> - Default: `false`
+> - Possible values: `false` / `[number]` ( *The desired top position in pixels* )
+
+#### numMaxLbTop
+
+Set the `top` position of the maximum label.
+
+> - Default: `false`
+> - Possible values: `false` / `[number]` ( *The desired top position in pixels* )
+
 #### vertBarWidth
 
 Set the width of the **vertical** bar in px
-
 
 > - Default: `10`
 > - Possible values: `[number]`
@@ -379,6 +420,67 @@ The default object holds only one milestone and looks like this:
 		mlLineWidth: 1	
 	}
 
+##### milestones.mlPos
+
+The position of the milestone in percentage, or in absolute number if is set so (`numType='absolute'`).
+
+> - Default: `50`
+> - Possible values: `[number]` ( *Any number* )
+
+##### milestones.mlId
+
+Provide an optional `id` for the milestone.
+
+> - Default: `false`
+> - Possible values: `[string]` ( *the desired id* ) 
+
+##### milestones.mlClass
+
+The class that the milestone gets.
+
+> - Default: `'bi-middle-mlst'`
+> - Possible values: `[string]` ( *the desired class* )
+
+##### milestones.mlDim
+
+The dimension that the milestone gets.
+
+- `'inherit'`: The milestone gets the height (or width) of the wrapper element
+- `x[%]`: The milstone gets it's height (or width) according to the given percentage relatively to it's parent element
+- `x[px]`: The milestone get's the exact given dimention in pixels 
+
+> - Default: `'inherit'`
+> - Possible values: `[string]`: `'inherit'` / `[px]` / `[%]`
+
+##### milestones.mlLabel
+
+The label that the milestone will display.
+
+> - Default: `'Half'`
+> - Possible values: `[string]` ( *The desired label* )
+
+##### milestones.mlLabelVis
+
+The display method of the milestone label.
+
+> - Default: `'hover'`
+> - Possible values: `'hover'` / `'visible'` / `'hidden'`
+
+
+##### milestones.mlHoverRange
+
+The milestone's wrapper width that triggers the label hover event. (The smaller you set it, the more accurate the hover trigger event will be)
+
+> - Default: `15`
+> - Possible values: `[number]` ( *The desired range in pixels* )
+
+##### milestones.mlLineWidth
+
+The milestone's line width in pixels
+
+> - Default: `1`
+> - Possible values: `[number]` ( *The desired width in pixels* )
+
 #### avgActive
 
 Enable or disable the average amount calculation of grouped elements. 
@@ -390,9 +492,135 @@ For example, you might have 10 elements but you want to devide them into two sma
 > - Default: `false`
 > - Possible values: `[boolean]`: `true` / `false`
 
+#### avgColorIndicator
+
+Set this option to `true` if you want to have different bar colour for those elements that are above the average amount and those that are below it.
+
+> Note that this will work only if `avgActive` is set to `true`
+> 
+> - Default: `false`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### avgColorBelowAvg
+
+Set the bar colour for those elements that are **below the average**. By default this colour is given by the `bi-style.css` file by the following selector:
+
+`.bi-wrp.bi-default-theme.bi-avgBelow .bi-barInner`
+
+> Note that this will work only if `avgActive` and `avgColorIndicator` are set to `true`
+> 
+> - Default: `false`
+> - Possible values: `[string]` ( *any valid `HEX`, `colorName` or `rgb`* )
+
+#### avgColorAboveAvg
+
+Set the bar colour for those elements that are **above the average**. By default this colour is given by the `bi-style.css` file by the following selector:
+
+`.bi-wrp.bi-default-theme.bi-avgAbove .bi-barInner`
+
+> Note that this will work only if `avgActive` and `avgColorIndicator` are set to `true`
+> 
+> - Default: `false`
+> - Possible values: `[string]` ( *any valid `HEX`, `colorName` or `rgb`* )
+
+#### avgMlId
+
+Provide an optional `id` for the average indication milestone.
+
+> - Default: `false`
+> - Possible values: `[string]` ( *the desired id* ) 
+
+#### avgMlClass
+
+The class that the average indication milestone gets.
+
+> - Default: `'bi-average-mlst'`
+> - Possible values: `[string]` ( *the desired class* )
+
+#### avgMlDim
+
+The dimension that the average indication milestone gets. This is the same as the `mlDim` property (check the `milestones` option).
+
+> - Default: `'inherit'`
+> - Possible values: `[string]`
+
+#### avgLabel
+
+The average indication milestone's label.
+
+> - Default: `'Average'`
+> - Possible values: `[string]` ( *The desired label* )
+
+#### avgLabelNum
+
+Set this to `false` if you don't want for the average amount to be displayed on the average indication milestone's label.
+
+> - Default: `true`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### avgLabelVis
+
+The display method of the average indication milestone label.
+
+> - Default: `'hover'`
+> - Possible values: `'hover'` / `'visible'` / `'hidden'`
+
+
+#### avgLabelHoverRange
+
+The average indication milestone's wrapper width that triggers the label hover event. (The smaller you set it, the more accurate the hover trigger event will be)
+
+> - Default: `15`
+> - Possible values: `[number]` ( *The desired range in pixels* )
+
+#### avgLineWidth
+
+The average indication milestone's line width in pixels
+
+> - Default: `1`
+> - Possible values: `[number]` ( *The desired width in pixels* )
+
 #### limLabel
 
 Enable or disable the min / max label indicator of grouped elements
+
+> - Default: `true`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### limMinLabel
+
+The text that the minimum label will display.
+
+> - Default: `'min'`
+> - Possible values: `[string]` ( *The desired text* )
+
+#### limMaxLabel
+
+The text that the maximum label will display.
+
+> - Default: `true`
+> - Possible values: `[string]` ( *The desired text* )
+
+#### limMinVisible
+
+Display or hide the minimum label
+
+> - Default: `true`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### limMaxVisible
+
+Display or hide the maximum label
+
+> - Default: `true`
+> - Possible values: `[boolean]`: `true` / `false`
+
+#### limLabelPos
+
+Attach the min/max label either to the number, or to the title (if given)
+
+> - Default: `'num'`
+> - Possible values: `'num'` / `'title'`
 
 ## Methods ##
 

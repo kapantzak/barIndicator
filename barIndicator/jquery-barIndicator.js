@@ -885,12 +885,12 @@
 		lbDecimals: 0,
 		numMin: 0,
 		numMax: 100,
-		numMinLabel: false,	//Readme
-		numMaxLabel: false,	//Readme
-		numMinLbLeft: false, //Readme
-		numMaxLbRight: false, //Readme
-		numMinLbTop: false, //Readme
-		numMaxLbTop: false, //Readme
+		numMinLabel: false,	
+		numMaxLabel: false,	
+		numMinLbLeft: false, 
+		numMaxLbRight: false, 
+		numMinLbTop: false, 
+		numMaxLbTop: false,
 		vertBarWidth: 10,
 		horBarHeight: 10,
 		vertBarHeight: 'line',			
@@ -912,7 +912,7 @@
 			}
 		},
 		avgActive: false,
-		avgColorIndicator: false,	//Readme
+		avgColorIndicator: false,	
 		avgColorBelowAvg: false,
 		avgColorAboveAvg: false,
 		avgMlId: false,
@@ -928,7 +928,7 @@
 		limMaxLabel: 'max',
 		limMinVisible: true,
 		limMaxVisible: true,
-		limLabelPos: 'num'	//num / title
+		limLabelPos: 'num'	
 	}
 	
 	$(document).on('bi.dataAvgSet', function(e,a) {		
