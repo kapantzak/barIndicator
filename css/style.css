@@ -108,6 +108,7 @@ h1,h2,h3,p { font-weight:100 }
 	text-decoration:none;
 	color:#fff;
 }
+#readmeLink a img { height:20px }
 #readmeLink:hover {
 	background-color:#2b7eb5;
 }
