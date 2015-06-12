@@ -429,9 +429,9 @@ The position of the milestone in percentage, or in absolute number if is set so 
 
 ##### milestones.mlId
 
-Provide an optional `id` for the milestone.
+Provide an `id` for the milestone.
 
-> - Default: `false`
+> - Default: `mlst-half`
 > - Possible values: `[string]` ( *the desired id* ) 
 
 ##### milestones.mlClass
