@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bar Indicator - jQuery plugin</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300&subset=latin,greek-ext' rel='stylesheet' type='text/css'>
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="barIndicator/css/bi-style.css" rel="stylesheet" />
+</head>
+<body>
+
+	<div id="goTop">Top</div>
+		
+	<div id="main-wrapper">
+	
+		<h1 id="mainHeader"><img id="pluginLogo" src="img/plugin-logo-sm.png" /> Bar Indicator</h1>
+		<h3>A jQuery plugin to visualize numeric data</h3>
+		<hr />
+		
+		<div class="textSection fulldiv">
+			<p>This is a demo page that shows how you can use <strong>barIndicator</strong> plugin.</p>
+			<p>				
+				<div id="contents" class="cont-expanded">
+					<h3><span>Contents</span><span id="cont-toggle">-<span></h3>
+					<div class="contentsInner">
+						<div id="cont-options" class="contInnerSec">
+							<h3>Options</h3>
+						</div>
+						<div id="cont-methods" class="contInnerSec">
+							<h3>Methods + Getters</h3>
+						</div>
+						<div id="cont-events" class="contInnerSec">
+							<h3>Events</h3>
+						</div>
+					</div>
+				</div>
+			</p>
+			<p>In order to implement it in your site, just copy the <i>barIndicator</i> folder with all it's contents and make links to the <i>bi-style.css</i> and <i>jquery-barIndicator.js</i> files</p>
+			<p><i>Don't forget to include <strong><a href="https://jquery.com/" target="_blank">jQuery</a></strong> and <strong><a href="http://gsgd.co.uk/sandbox/jquery/easing/" target="_blank">easing</a></strong> before the plugin.</i></p>
+			<p>All you need is a simple html element like a <i>span</i> or a <i>div</i></p>
+			<div class="codeBlock">
+				<span class="codeHeader">HTML</span>
+				<code>
+					&lt;head&gt;<br />
+					&nbsp;&lt;link href="../barIndicator/css/bi-style.css" rel="stylesheet" /&gt;<br />
+					&nbsp;&lt;script src="../jQuery.js"&gt;&lt;/script&gt;<br />
+					&nbsp;&lt;script src="../barIndicator/jquery-barIndicator.js"&gt;&lt;/script&gt;<br />
+					&lt;/head&gt;<br />
+					&lt;body&gt;<br />
+					&nbsp;...<br />
+					&nbsp;&lt;span id="bar"&gt;25&lt;/span&gt;<br />
+					&nbsp;...<br />
+					&lt;/body&gt;<br />
+				</code>
+			</div>
+			<p>And just initialize it!</p>
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					&lt;script&gt;<br />
+					&nbsp;$('#bar').barIndicator();<br />
+					&lt;/script&gt;
+				</code>
+			</div>
+		</div>
+		
+		<h2>Options</h2>
+		<hr />
+		
+		<div class="textSection fulldiv">
+			<p>For more information about options, methods and events, check the <a href="https://github.com/kapantzak/barIndicator" target="_blank">README</a> file.</p>
+		</div>
+	
+		<div id="sec-horizontal" class="section fullDiv secOpt" data-content="Horizontal">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Horizontal (Default)</h3>
+				<span id="test1" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					$('#bar').barIndicator();
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-vertical" class="section fullDiv secOpt" data-content="Vertical">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Vertical <code>style</code></h3>
+				<span id="test2" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = { style:'vertical' };
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-barHeight" class="section fullDiv secOpt" data-content="Bar height">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar height <code>horBarHeight</code></h3>
+				<span id="test3" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = { horBarHeight:30 };
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-barColor" class="section fullDiv secOpt" data-content="Bar color">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar color <code>foreColor</code></h3>
+				<span id="test4" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;foreColor:'#e25a48'<br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-backColor" class="section fullDiv secOpt" data-content="Background color">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar holder color <code>backColor</code></h3>
+				<span id="test5" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;foreColor:'#e25a48',<br />
+					&nbsp;backColor:'rgb(126,196,107)'<br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-lbPos" class="section fullDiv secOpt" data-content="Label position">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Label position <code>horLabelPos</code></h3>
+				<span id="test6" class="testBar">25</span>
+				<span id="test7" class="testBar">25</span>
+				<span id="test8" class="testBar">25</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;horLabelPos:'topRight' <i>//'left'/'right'</i><br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-title" class="section fullDiv secOpt" data-content="Title">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Title <code>horTitle</code></h3>
+				<span id="test9" class="testBar">25</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;horTitle:'This is a sample title'<br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-colorRange" class="section fullDiv secOpt" data-content="Color range">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Bar color range <code>colorRange</code></h3>
+				<div class="secInner-comments">
+					Set 'colorRange' option to true. The plugin holds it's default color limits.
+				</div>
+				<span id="test10" class="testBar testBar1">25</span>	
+				<span id="test11" class="testBar testBar1">55</span>
+				<span id="test12" class="testBar testBar1">95</span>	
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;colorRange:true<br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-custColorRange" class="section fullDiv secOpt" data-content="Custom color range">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Custom color range<br /><code>colorRange</code> + <code>colorRangeLimits</code></h3>
+				<div class="secInner-comments">
+					Provide a custom object that holds your custom color limits.
+				</div>
+				<span id="test13" class="testBar testBar2">15</span>	
+				<span id="test14" class="testBar testBar2">35</span>
+				<span id="test15" class="testBar testBar2">45</span>
+				<span id="test15" class="testBar testBar2">80</span>
+				<span id="test15" class="testBar testBar2">95</span>				
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+			<div class="codeBlock">
+				<span class="codeHeader">jQuery</span>
+				<code>
+					var opt = {<br />
+					&nbsp;colorRange:true<br />
+					&nbsp;colorRangeLimits: {<br />
+					&nbsp;&nbsp;optimal: '0-20',<br />
+					&nbsp;&nbsp;newRangeOne: '21-40-#4aa64f',<br />
+					&nbsp;&nbsp;newRangeTwo: '41-60-green',<br />
+					&nbsp;&nbsp;newRangeThree: '61-90-rgb(241,144,40)',<br />
+					&nbsp;&nbsp;critical: '91-100'<br />					
+					&nbsp;}<br />
+					};<br />
+					$('#bar').barIndicator(opt);
+				</code>
+			</div>
+			</div>
+		</div>
+		
+		<div id="sec-absNumber" class="section fullDiv secOpt" data-content="Absolute numbers">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Absolute numbers<br /> <code>numType</code> + <code>numMin</code> + <code>numMax</code></h3>
+				<div class="secInner-comments">
+					Set the type of number to 'absolute'.<br /> 
+					Also, set a minimum and maximum limit.
+				</div>
+				<span id="test16" class="testBar">150</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">HTML</span>
+					<code>
+						&lt;span id="bar"&gt;150&lt;/span&gt;<br />
+					</code>
+				</div>
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;numType:'absolute',<br />					
+						&nbsp;numMin:0,<br />
+						&nbsp;numMax:250<br />
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<div id="sec-numLb" class="section fullDiv secOpt" data-content="Min/Max labels">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Min/max numbers (labels)<br /> <code>numMinLabel</code> + <code>numMaxLabel</code></h3>
+				<div class="secInner-comments">
+					Enable the minimum / maximum number indicator labels.					
+				</div>
+				<span id="test21" class="testBar">25</span>				
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">				
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;numMinLabel:true,<br />					
+						&nbsp;numMaxLabel:true<br />
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+				<div class="secInner-comments marginTop-md">
+					You can customize the appearance of the labels, either by editing the <code>bi-style.css</code> file, or by passing specific options like <code>numMinLbLeft</code>, <code>numMaxLbRight</code> etc<br /> 
+					(<i>For more details, check the README file</i>)
+				</div>
+			</div>
+		</div>
+		
+		<div id="sec-milestones" class="section fullDiv secOpt" data-content="Milestones">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Milestones <code>milestones</code></h3>
+				<div class="secInner-comments">
+					Provide an object that holds your custom milestone points.
+				</div>
+				<span id="test17" class="testBar">25</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">				
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;milestones: {<br />
+						&nbsp;&nbsp;1: {<br />
+						&nbsp;&nbsp;&nbsp;mlPos: 20,<br />
+						&nbsp;&nbsp;&nbsp;mlId: false,<br />
+						&nbsp;&nbsp;&nbsp;mlClass: 'bi-custom',<br />
+						&nbsp;&nbsp;&nbsp;mlDim: '200%',<br />
+						&nbsp;&nbsp;&nbsp;mlLabel: 'Milestone one',<br />
+						&nbsp;&nbsp;&nbsp;mlLabelVis: 'hover',<br />	 
+						&nbsp;&nbsp;&nbsp;mlHoverRange: 15,<br />	
+						&nbsp;&nbsp;&nbsp;mlLineWidth: 1<br />	
+						&nbsp;&nbsp;},<br />
+						&nbsp;&nbsp;2: {<br />
+						&nbsp;&nbsp;&nbsp;mlPos: 60,<br />
+						&nbsp;&nbsp;&nbsp;mlId: false,<br />
+						&nbsp;&nbsp;&nbsp;mlClass: 'bi-custom',<br />
+						&nbsp;&nbsp;&nbsp;mlDim: '200%',<br />
+						&nbsp;&nbsp;&nbsp;mlLabel: 'Milestone two',<br />
+						&nbsp;&nbsp;&nbsp;mlLabelVis: 'hover',<br />	 
+						&nbsp;&nbsp;&nbsp;mlHoverRange: 15,<br />	
+						&nbsp;&nbsp;&nbsp;mlLineWidth: 1<br />	
+						&nbsp;&nbsp;}<br />
+						&nbsp;}<br />
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<h2 id="sec-avgCalc" class="subHeader secOpt secOptImportant" data-content="Average">Average calculation</h2>
+		<hr />
+		
+		<div class="textSection fulldiv">
+			<p><strong>Bar Indicator</strong> gives you the option to calculate and display the average amount of a group of numbers.</p>
+			<p>Assuming that you have a group of elements and each of them represents one of the seven continents of Earth. Let's say that you want to display the percent of landmass of each continent relatively to the total landmass.</p>
+			<p>You have to tell the plugin which of the provided elements are included in the average calculation. In order to do that, you have to set the <pre>data-avgClass</pre> attribute and give a common value to those elements that belong to the same group.</p>
+		</div>
+		
+		<div class="codeBlock">
+			<span class="codeHeader">HTML</span>
+			<code>
+				&lt;span id="africa" class="contBar" data-avgClass="continent"&gt;20.3&lt;/span&gt;<br />
+				&lt;span id="antarctica" class="contBar" data-avgClass="continent"&gt;9.2&lt;/span&gt;<br />
+				&lt;span id="asia" class="contBar" data-avgClass="continent"&gt;29.4&lt;/span&gt;<br />
+				&lt;span id="australia" class="contBar" data-avgClass="continent"&gt;5.9&lt;/span&gt;<br />
+				&lt;span id="europe" class="contBar" data-avgClass="continent"&gt;6.8&lt;/span&gt;<br />
+				&lt;span id="northAmerica" class="contBar" data-avgClass="continent"&gt;16.4&lt;/span&gt;<br />
+				&lt;span id="southAmerica" class="contBar" data-avgClass="continent"&gt;12&lt;/span&gt;<br />
+			</code>
+		</div>
+		
+		<div class="textSection fulldiv">
+			<p>Use <pre>avgActive</pre> option to set average activation to <pre>true</pre></p>
+		</div>
+		
+		<div class="section fullDiv">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Average and min/max amounts<br /> <code>avgActive</code> + <code>horTitle</code></h3>
+				<div class="secInner-comments">
+					Set <code>avgActive</code> to <code>true</code> and calculate and display the average amount of the defined group.
+				</div>
+				<span id="africa" class="testBar testBar3" data-avgClass="continent">20.3</span>
+				<span id="antarctica" class="testBar testBar3" data-avgClass="continent">9.2</span>
+				<span id="asia" class="testBar testBar3" data-avgClass="continent">29.4</span>
+				<span id="australia" class="testBar testBar3" data-avgClass="continent">5.9</span>
+				<span id="europe" class="testBar testBar3" data-avgClass="continent">6.8</span>
+				<span id="northAmerica" class="testBar testBar3" data-avgClass="continent">16.4</span>
+				<span id="southAmerica" class="testBar testBar3" data-avgClass="continent">12</span>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">				
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var opt = {<br />
+						&nbsp;avgActive: true,<br />
+						&nbsp;avgColorIndicator: true,<br />
+						&nbsp;lbDecimals: 2,<br />						
+						&nbsp;horTitle: 'bi-title-id',<br />
+						&nbsp;milestones: false<br />
+						};<br />
+						$('#bar').barIndicator(opt);
+					</code>
+				</div>
+				<div class="secInner-comments marginTop-md">
+					If you set <code>avgColorIndicator</code> to <code>true</code>, every bar that is above the average will be red and every bar that is below the average will get green.<br />
+					You can change those colours either in <code>bi-style.css</code> or by giving the <code>avgColorBelowAvg</code> and <code>avgColorAboveAvg</code> options, a valid colour value.
+				</div>
+			</div>
+		</div>
+		
+		<h2>Methods</h2>
+		<hr />
+		
+		<div id="sec-reanimate" class="section fullDiv secMethods" data-content="Reanimate">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Reanimate <code>reanimateBar</code></h3>
+				<div class="secInner-comments">
+					Call this method if you want to execute the loading animation on demand.
+				</div>
+				<span id="test18" class="testBar">85</span>
+				<div class="secInner-btn">
+					<button id="reanimateBtn">Reanimate</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the method on click</i>
+						$('#reanimateBtn').on('click', function() {<br />
+						&nbsp;bar.barIndicator('reanimateBar');<br />
+						});
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<div id="sec-loadData" class="section fullDiv secMethods" data-content="Load data">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Load new data <code>loadNewData</code></h3>
+				<div class="secInner-comments">
+					Call this method if you want to load new data on demand.
+				</div>
+				<span id="test19" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="loadDataBtn">Load data</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the method on click</i>
+						$('#reanimateBtn').on('click', function() {<br />
+						&nbsp;var newData = 85;<br />
+						&nbsp;bar.barIndicator('loadNewData', [newData]);<br />
+						});
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<div id="sec-destroy" class="section fullDiv secMethods" data-content="Destroy">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Destroy <code>destroy</code></h3>
+				<div class="secInner-comments">
+					Call this method if you want to disable the plugin and remove all of it's data.<br />
+					In order to reinitialize the plugin on <code>#initBtn</code> click, you have to set <code>forceAnim</code> option to <code>true</code><br />
+					(<i>check the README file for more information</i>)
+				</div>
+				<span id="test20" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="destroyBtn">Destroy</button>
+					<button id="initBtn" class="">Initialize</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the method on click</i><br />
+						<i>//Destroy</i><br />
+						$('#destroyBtn').on('click', function() {<br />
+						&nbsp;bar.barIndicator('destroy');<br />						
+						});<br />
+						<i>//Reinitialize</i><br />
+						$('#initBtn').on('click', function() {<br />
+						&nbsp;bar.barIndicator({ forceAnim:true });<br />						
+						});
+					</code>
+				</div>
+			</div>
+		</div>
+			
+		<h2>Getters</h2>
+		<hr />
+		
+		<div id="sec-getPluginData" class="section fullDiv secMethods" data-content="Get plugin data (getter)">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Get plugin data <code>getPluginData</code></h3>
+				<div class="secInner-comments">
+					Call the <code>getPluginData</code> getter and get the <code>barLength</code> property.<br />
+					(<i>check the README file for more information</i>)
+				</div>
+				<span id="test22" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="getPluginDataBtn">Get data</button>
+				</div>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						bar.barIndicator();<br />
+						<i>//Call the getter and store the data in a new variable</i><br />						
+						var data = bar.barIndicator('getPluginData');<br />
+						alert(data.barLength);
+					</code>
+				</div>
+			</div>
+		</div>
+		
+		<h2>Events</h2>
+		<hr />
+		
+		<div id="sec-events" class="section fullDiv secEvents" data-content="Events">				
+			<div class="sectionInner sectionInner-half sectionInner-left">
+				<h3 class="sectionHeader">Events</h3>
+				<div class="secInner-comments">
+					Click the 'Start' button and check the events triggered.<br />
+					As soon as the animation has stoped, the two other buttons will get enabled.
+				</div>
+				<span id="test23" class="testBar">35</span>
+				<div class="secInner-btn">
+					<button id="initPluginEventBtn">Start</button>
+					<button id="reanimPluginEventBtn" disabled>Reanimate</button>
+					<button id="dataPluginEventBtn" disabled>Load data</button>
+				</div>
+				<ul id="test23-events"></ul>
+			</div>
+			<div class="sectionInner sectionInner-half sectionInner-right">
+				<div class="codeBlock">
+					<span class="codeHeader">jQuery</span>
+					<code>
+						var bar = $('#bar');<br /> 
+						$('#initPluginEventBtn').on('click', function() {<br />
+						&nbsp;$(document).on('bi.innerContentAppended', function() {<br />
+						&nbsp;&nbsp;<i>//Call any function on event occurrence</i>
+						&nbsp;});<br />
+						});
+					</code>
+				</div>
+			</div>
+		</div>
+			
+		<footer>
+			<img id="kapa_logo" src="img/logo_sm.png" alt="logo" />
+			<i>Developed by <a href="mailto:kapantzak@gmail.com" title="kapantzak@gmail.com">John Kapantzakis</a> (c) 2015</i><br />
+			<i>Released under the <a href="barIndicator/LICENSE.txt" target="_blank">MIT License</a></i>			
+		</footer>
+		
+	</div>
+	
+	<script src="scripts/jquery-1.11.2.min.js"></script>	
+	<script src="scripts/jquery.easing.1.3.js"></script>
+	<script src="barIndicator/jquery-barIndicator.js"></script>
+	<script src="scripts/scripts.js"></script>
+</body>
+</html>
