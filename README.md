@@ -411,7 +411,7 @@ The default object holds only one milestone and looks like this:
 
     1: {
 		mlPos: 50,
-		mlId: false,
+		mlId: 'mlst-half',
 		mlClass: 'bi-middle-mlst',
 		mlDim: 'inherit',
 		mlLabel: 'Half',
