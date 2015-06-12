@@ -97,6 +97,21 @@ h1,h2,h3,p { font-weight:100 }
 	padding: 20px;
 	background-color:#fafafa;
 }
+
+#readmeLink {	
+	background-color:#3498db;	
+	float:right;
+}
+#readmeLink a {
+	display:block;
+	padding:5px 10px;
+	text-decoration:none;
+	color:#fff;
+}
+#readmeLink:hover {
+	background-color:#2b7eb5;
+}
+
 #contents { 
 	width:100%;
 	float:left;
