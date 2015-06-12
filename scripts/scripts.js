@@ -4,6 +4,16 @@ $(document).ready(function() {
 	toggleGoTop();
 	buildContents();
 	
+	//Intro
+	var optIntro = {
+		//labelVisibility:'hidden',
+		counterStep:1,
+		milestones:false,
+		horBarHeight:20,
+		animTime:1000
+	}
+	$('#introSample').barIndicator(optIntro);
+	
 	//#1
 	$('#test1').barIndicator();
 	//#2
