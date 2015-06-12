@@ -878,8 +878,8 @@
 				}
 				//Change plugin stored data
 				var storedData = $.data(this.$el, 'storedAttr');
-				storedData['barLength'] = barLength;
-				storedData['num'] = newNum.replace('%','');
+				storedData['barLength'] = barLength;				
+				storedData['num'] = parseFloat(newNum);
 			}
 		},
 				
