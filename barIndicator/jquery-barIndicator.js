@@ -24,11 +24,11 @@
 			var $el = that.$el;
 			var opt = that.opt;
 			var selector = that.selector;
-			
 			var style = opt.style;
 			var data = opt.data;
 			var type = opt.numType;
 			var dec = opt.lbDecimals;	
+			var $elID = $el.attr('id');
 			
 			var orText = $el.text();
 			var orClass = $el.attr('class');
@@ -48,6 +48,13 @@
 			var lengthObj = Plugin.prototype._getLength.apply(this, [paramsLength]);
 			var lbNum = lengthObj.lbNum;
 			var barLength = lengthObj.barLength;
+			
+			//Add unique data-biID
+			var paramsID = {
+				that: that
+			}
+			var unID = Plugin.prototype._getUniqueID.apply(this, [paramsID]);
+			$el.attr('data-biID', unID);
 			
 			//Add classes (bi-wrp + theme class)
 			$el.addClass(opt.wrpClass + ' ' + opt.theme).attr('data-lbNum', lbNum);
@@ -155,7 +162,10 @@
 			var bi_barHolder = $el.find('.bi-bar');
 			var bi_label = $el.find('.bi-label');
 			//Trigger event
-			$(document).trigger('bi.innerContentAppended', [$el]);
+			$(document).trigger('bi.innerContentAppended', [$el]);			
+			if ($elID && $elID != '') {
+				$(document).trigger('bi_' + $elID + '.innerContentAppended');
+			}
 			
 			if (style == 'horizontal') {
 				var lbPos = opt.horLabelPos;
@@ -298,6 +308,28 @@
 				}
 			}
 		},
+		
+		_getUniqueID: function(par) {
+			if (par) {
+				var that = par.that;
+				var opt = that.opt;
+				var wrpClass = opt.wrpClass;
+				var idnum = 0;
+				var nArr = [];
+				$('.' + wrpClass).each(function() {
+					var dn = $(this).attr('data-biID');
+					if (dn && dn != '') {
+						var n = parseInt(dn.replace('bi_', ''));
+						nArr.push(n);
+					}
+				});					
+				if (nArr.length > 0) {
+					var nmax = nArr.sort(function(a,b) { return b-a });
+					idnum = parseInt(nmax) + 1;
+				}
+				return 'bi_' + idnum;
+			}
+		},
 				
 		_getLength: function(par) {
 			if (par) {
@@ -363,6 +395,8 @@
 		_animateBar: function(par) {	
 			if (par) {
 				var that = par.that;
+				var $el = that.$el;
+				var $elID = $el.attr('id');
 				var opt = that.opt;
 				var style = opt.style;
 				var at = opt.animTime;
@@ -377,8 +411,21 @@
 						}
 						bar.animate({'height':bl},at,eas).queue(function() {
 							$(document).trigger('bi.animationCompleted');
-							if (par.reanim == true) { $(document).trigger('bi.reanimateBarStop'); }
-							if (par.loadData == true) { $(document).trigger('bi.loadDataStop'); }
+							if ($elID && $elID != '') {
+								$(document).trigger('bi_' + $elID + '.animationCompleted');
+							}
+							if (par.reanim == true) { 
+								$(document).trigger('bi.reanimateBarStop'); 
+								if ($elID && $elID != '') {
+									$(document).trigger('bi_' + $elID + '.reanimateBarStop');
+								}
+							}
+							if (par.loadData == true) { 
+								$(document).trigger('bi.loadDataStop');
+								if ($elID && $elID != '') {
+									$(document).trigger('bi_' + $elID + '.loadDataStop');
+								}
+							}
 							$(this).dequeue();
 						});
 					} else if (style == 'horizontal') {
@@ -387,8 +434,21 @@
 						}
 						bar.animate({'width':bl},at,eas).queue(function() {
 							$(document).trigger('bi.animationCompleted');
-							if (par.reanim == true) { $(document).trigger('bi.reanimateBarStop'); }
-							if (par.loadData == true) { $(document).trigger('bi.loadDataStop'); }
+							if ($elID && $elID != '') {
+								$(document).trigger('bi_' + $elID + '.animationCompleted');
+							}
+							if (par.reanim == true) { 
+								$(document).trigger('bi.reanimateBarStop'); 
+								if ($elID && $elID != '') {
+									$(document).trigger('bi_' + $elID + '.reanimateBarStop');
+								}
+							}
+							if (par.loadData == true) { 
+								$(document).trigger('bi.loadDataStop'); 
+								if ($elID && $elID != '') {
+									$(document).trigger('bi_' + $elID + '.loadDataStop');
+								}
+							}
 							$(this).dequeue();
 						});
 					}
@@ -471,7 +531,8 @@
 		_getMilestones: function(par) {
 			if (par) {
 				var that = par.that;
-				var $el = that.$el;				
+				var $el = that.$el;	
+				var $elID = $el.attr('id');
 				var opt = that.opt;
 				var style = opt.style;
 				var mlst = opt.milestones;
@@ -518,6 +579,9 @@
 					barWrp.append(ml);
 					var $ml = barWrp.find('.bi-mlst_' + m);
 					$(document).trigger('bi.milestoneAppended', [$ml]);
+					if ($elID && $elID != '') {
+						$(document).trigger('bi_' + $elID + '_' + mlstId + '.milestoneAppended');
+					}
 				}
 				//Give position and (if true)dimensions
 				if (slf) {
@@ -741,6 +805,7 @@
 		//Public methods --------------------------------------------------------------------------------- //
 		reanimateBar: function() {
 			var $el = this.$el;
+			var $elID = $el.attr('id');
 			var opt = this.opt;
 			var barLength = $.data($el, 'storedAttr').barLength;
 			var num = $.data($el, 'storedAttr').num;	
@@ -768,12 +833,15 @@
 			}
 			//Trigger event
 			$(document).trigger('bi.reanimateBarStart');
+			if ($elID && $elID != '') {
+				$(document).trigger('bi_' + $elID + '.reanimateBarStart');
+			}
 		},
 		
 		loadNewData: function(par) {
 			if (par) {
 				var newNum = par;
-				
+				var $elID = this.$el.attr('id');
 				//Get length object
 				var paramsLength = {
 					that: this,
@@ -805,6 +873,9 @@
 				}
 				//Trigger event
 				$(document).trigger('bi.loadDataStart');
+				if ($elID && $elID != '') {
+					$(document).trigger('bi_' + $elID + '.loadDataStart');
+				}
 				//Change plugin stored data
 				var storedData = $.data(this.$el, 'storedAttr');
 				storedData['barLength'] = barLength;
@@ -823,7 +894,7 @@
 				.empty()
 				.html(orText)
 				.attr('class', orClass)
-				.removeAttr('data-lbNum');
+				.removeAttr('data-lbNum data-biid');
 		}
 		
 	}
@@ -902,7 +973,7 @@
 		milestones: {
 			1: {
 				mlPos: 50,
-				mlId: false,
+				mlId: 'mlst-half',
 				mlClass: 'bi-middle-mlst',
 				mlDim: 'inherit',
 				mlLabel: 'Half',
@@ -939,7 +1010,6 @@
 				that: a.that,
 				$el: self
 			};
-			//console.log(self.text());
 			Plugin.prototype._setAvgMilestone.apply(this, [paramsAvg]);
 		});
 	});

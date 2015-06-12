@@ -719,6 +719,27 @@ Triggers on `loadData` method call start
 
 Triggers as soon as the 'loadData' method bar animation completes
 
+### Specific events
+
+You can listen an event from a specific element. You just have to provide an id to this element and listen to that *specific* event like this:
+
+    <span id="elemID">25</span>
+
+Now, you can listen for the *specific* event:
+
+    //Initialize the plugin
+    $('#elemID').barIndicator();
+    //Listen the 'bi.innerContentAppended' event
+	//Add an underscore and the element's id after bi string
+	$(document).on('bi_elemID.innerContentAppended', function() {
+		//do your stuff..
+	});
+
+The same way, if you would like to listen for the *specific* `bi.animationCompleted` event you would listen for this event:
+
+	'bi_elemID.animationCompleted'
+
+
 ## Themes ##
 
 

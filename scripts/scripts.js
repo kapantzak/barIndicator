@@ -231,6 +231,10 @@ var toggleGoTop = function() {
 	}
 }
 
+$(document).on('bi_test19.loadDataStart', function(e) {
+	console.log('test19 loadDataStart');
+});
+
 $(document).on('click', '#cont-toggle', function() {
 	var that = $(this);
 	var cont = $('#contents');
