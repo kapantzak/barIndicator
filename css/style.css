@@ -13,6 +13,22 @@ hr {
 .fullDiv {
 	width: 100%;
 }
+#introSampleWrp {
+	padding:15px;
+	border-radius:5px;
+	box-sizing:border-box;
+	border:3px dashed #d8d8d8;
+}
+#introSample .bi-label {
+	width: 60px;
+	line-height:30px;
+	padding:2px 0;
+	border-radius:3px;
+	text-align:center;
+	background-color:#555;
+	color:#fff;
+	margin-bottom:5px;
+}
 .codeBlock {
 	width:100%;
 	margin:10px 0;
@@ -81,6 +97,22 @@ h1,h2,h3,p { font-weight:100 }
 	padding: 20px;
 	background-color:#fafafa;
 }
+
+#readmeLink {	
+	background-color:#3498db;	
+	float:right;
+}
+#readmeLink a {
+	display:block;
+	padding:5px 10px;
+	text-decoration:none;
+	color:#fff;
+}
+#readmeLink a img { height:20px }
+#readmeLink:hover {
+	background-color:#2b7eb5;
+}
+
 #contents { 
 	width:100%;
 	float:left;
