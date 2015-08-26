@@ -357,8 +357,9 @@
 				var $el = that.$el;
 				var bar = $el.find('.bi-barInner');
 				var opt = that.opt;	
-				if (bar.attr('style')) {
-					bar.attr('style', bar.attr('style').replace('background-color', ''));
+				var barstyle = bar.attr('style');
+				if (barstyle) {
+					bar.attr('style', barstyle.replace('background-color', ''));
 				}
 				if (opt.colorRange == true) {				
 					var limObj = opt.colorRangeLimits;					
