@@ -679,7 +679,7 @@
 					var notInitCount = 0;
 					elem.each(function() {	
 						var notInit = !$.data(this, 'plugin_' + pluginName);
-						if (notInit == true) {
+						if (notInit) {
 							notInitCount++;
 						}
 					});
