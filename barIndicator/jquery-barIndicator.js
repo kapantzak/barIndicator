@@ -406,18 +406,18 @@
 						}
 						bar.animate({'height':bl},at,eas).queue(function() {
 							$(document).trigger('bi.animationCompleted');
-							if ($elID && $elID != '') {
+							if ($elID) {
 								$(document).trigger('bi_' + $elID + '.animationCompleted');
 							}
 							if (par.reanim == true) { 
 								$(document).trigger('bi.reanimateBarStop'); 
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.reanimateBarStop');
 								}
 							}
 							if (par.loadData == true) { 
 								$(document).trigger('bi.loadDataStop');
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.loadDataStop');
 								}
 							}
@@ -429,18 +429,18 @@
 						}
 						bar.animate({'width':bl},at,eas).queue(function() {
 							$(document).trigger('bi.animationCompleted');
-							if ($elID && $elID != '') {
+							if ($elID) {
 								$(document).trigger('bi_' + $elID + '.animationCompleted');
 							}
 							if (par.reanim == true) { 
 								$(document).trigger('bi.reanimateBarStop'); 
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.reanimateBarStop');
 								}
 							}
 							if (par.loadData == true) { 
 								$(document).trigger('bi.loadDataStop'); 
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.loadDataStop');
 								}
 							}
@@ -574,7 +574,7 @@
 					barWrp.append(ml);
 					var $ml = barWrp.find('.bi-mlst_' + m);
 					$(document).trigger('bi.milestoneAppended', [$ml]);
-					if ($elID && $elID != '') {
+					if ($elID) {
 						$(document).trigger('bi_' + $elID + '_' + mlstId + '.milestoneAppended');
 					}
 				}
@@ -828,7 +828,7 @@
 			}
 			//Trigger event
 			$(document).trigger('bi.reanimateBarStart');
-			if ($elID && $elID != '') {
+			if ($elID) {
 				$(document).trigger('bi_' + $elID + '.reanimateBarStart');
 			}
 		},
@@ -868,7 +868,7 @@
 				}
 				//Trigger event
 				$(document).trigger('bi.loadDataStart');
-				if ($elID && $elID != '') {
+				if ($elID) {
 					$(document).trigger('bi_' + $elID + '.loadDataStart');
 				}
 				//Change plugin stored data
