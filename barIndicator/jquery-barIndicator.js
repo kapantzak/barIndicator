@@ -492,8 +492,6 @@
 									var cntrLb = '';
 								}
 								label.html(label.html() + cntrLb);
-							} else {
-								label.html(label.html());
 							}
 						}
 					},ct);				
