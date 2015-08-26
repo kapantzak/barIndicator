@@ -312,7 +312,7 @@
 				var nArr = [];
 				$('.' + wrpClass).each(function() {
 					var dn = $(this).attr('data-biID');
-					if (dn && dn != '') {
+					if (dn) {
 						var n = parseInt(dn.replace('bi_', ''));
 						nArr.push(n);
 					}
