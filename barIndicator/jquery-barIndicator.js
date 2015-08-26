@@ -163,7 +163,7 @@
 			var bi_label = $el.find('.bi-label');
 			//Trigger event
 			$(document).trigger('bi.innerContentAppended', [$el]);			
-			if ($elID && $elID != '') {
+			if ($elID) {
 				$(document).trigger('bi_' + $elID + '.innerContentAppended');
 			}
 			
