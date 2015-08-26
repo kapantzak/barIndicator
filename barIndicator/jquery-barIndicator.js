@@ -301,7 +301,7 @@
 				}
 			} else {
 				var style = opt.style;
-				if (style == 'vartical') {
+				if (style == 'vertical') {
 					bi_bar.css({'height': barLength});
 				} else if (style == 'horizontal') {
 					bi_bar.css({'width': barLength});
