@@ -526,11 +526,8 @@
 				var style = opt.style;
 				var mlst = opt.milestones;
 				var slf = par.self; 
-				if (slf) {
-					var barWrp = slf.find('.bi-bar');
-				} else {
-					var barWrp = $el.find('.bi-bar');
-				}
+				var barWrp = (slf || $el).find('.bi-bar');
+
 				//Append milestones
 				if (par.mlstObj) {
 					mlst = par.mlstObj;
@@ -573,11 +570,8 @@
 					}
 				}
 				//Give position and (if true)dimensions
-				if (slf) {
-					var thisEl = slf;
-				} else {
-					var thisEl = $el;
-				}
+				var thisEl = (slf || $el);
+
 				thisEl.find('.bi-milestone').each(function() {
 					var ml = $(this);
 					var mlId = ml.attr('data-id');
