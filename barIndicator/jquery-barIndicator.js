@@ -476,12 +476,8 @@
 				function counter() {
 					setTimeout(function() {
 						label.html(i.toFixed(decim) + sign);					
-						if (i<target) {						
-							if ((target - i) > step) {
-								i+= step;
-							} else {
-								i = target;
-							}						
+						if (i<target) {
+							i = Math.min(i + step, target);
 							counter();
 						} else {
 							if (limLabelPos == 'num') { 
