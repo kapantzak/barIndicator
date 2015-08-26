@@ -223,16 +223,10 @@
 					for(n in posObj) {
 						switch (n) {
 							case 'top':
-								lb.css({'top':posObj[n]});
-								break;
 							case 'left':
-								lb.css({'left':posObj[n]});
-								break;
 							case 'bottom':
-								lb.css({'bottom':posObj[n]});
-								break;
 							case 'right':
-								lb.css({'right':posObj[n]});
+								lb.css({n:posObj[n]});
 								break;
 						}
 					}
