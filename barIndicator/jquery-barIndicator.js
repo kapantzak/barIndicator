@@ -33,7 +33,7 @@
 			var orText = $el.text();
 			var orClass = $el.attr('class');
 
-			if (data != false && !isNaN(data)) {
+			if (data && !isNaN(data)) {
 				var num = parseFloat(data).toFixed(dec);
 			} else if (data == false) {
 				var num = parseFloat(orText.replace(',','.')).toFixed(dec);
@@ -76,15 +76,15 @@
 			var numMax = opt.numMax;
 			var numMinLabel = opt.numMinLabel;
 			var numMaxLabel = opt.numMaxLabel;
-			var numMinLbLeft = (opt.numMinLbLeft != false && !isNaN(opt.numMinLbLeft)) ? opt.numMinLbLeft : '';
-			var numMaxLbRight = (opt.numMaxLbRight != false && !isNaN(opt.numMaxLbRight)) ? opt.numMaxLbRight : '';
-			var numMinLbTop = (opt.numMinLbTop != false && !isNaN(opt.numMinLbTop)) ? opt.numMinLbTop : '';
-			var numMaxLbTop = (opt.numMaxLbTop != false && !isNaN(opt.numMaxLbTop)) ? opt.numMaxLbTop : '';
+			var numMinLbLeft = (opt.numMinLbLeft && !isNaN(opt.numMinLbLeft)) ? opt.numMinLbLeft : '';
+			var numMaxLbRight = (opt.numMaxLbRight && !isNaN(opt.numMaxLbRight)) ? opt.numMaxLbRight : '';
+			var numMinLbTop = (opt.numMinLbTop && !isNaN(opt.numMinLbTop)) ? opt.numMinLbTop : '';
+			var numMaxLbTop = (opt.numMaxLbTop && !isNaN(opt.numMaxLbTop)) ? opt.numMaxLbTop : '';
 			var numLabelEdge = '';
-			if (numMinLabel == true) {
+			if (numMinLabel) {
 				numLabelEdge += '<span class="bi-labelEdge bi-edge-min" style="left:' + numMinLbLeft + 'px;top:' + numMinLbTop + 'px">' + numMin + '</span>';
 			}
-			if (numMaxLabel == true) {
+			if (numMaxLabel) {
 				numLabelEdge += '<span class="bi-labelEdge bi-edge-max" style="right:' + numMaxLbRight + 'px;top:' + numMaxLbTop + 'px">' + numMax + '</span>';
 			}
 			if (style == 'vertical') {	
@@ -141,7 +141,7 @@
 				$el.addClass('bi-horizontal ' + horPosClass);
 			}
 			
-			if (style == 'horizontal' && ttl != false) {
+			if (style == 'horizontal' && ttl) {
 				var t = '';
 				if (ttl == 'bi-title-id') {
 					t = $el.attr('id');
@@ -163,7 +163,7 @@
 			var bi_label = $el.find('.bi-label');
 			//Trigger event
 			$(document).trigger('bi.innerContentAppended', [$el]);			
-			if ($elID && $elID != '') {
+			if ($elID) {
 				$(document).trigger('bi_' + $elID + '.innerContentAppended');
 			}
 			
@@ -191,19 +191,19 @@
 			var foreColor = opt.foreColor;
 			var backColor = opt.backColor;
 			var labelColor = opt.labelColor;
-			if (foreColor != false) {
+			if (foreColor) {
 				var fColor = Plugin.prototype._getColorValue.apply(this, [foreColor]);
 				if (fColor) {
 					bi_bar.css({'background-color':fColor});
 				}
 			}
-			if (backColor != false) {
+			if (backColor) {
 				var bColor = Plugin.prototype._getColorValue.apply(this, [backColor]);
 				if (bColor) {
 					bi_barHolder.css({'background-color':bColor});
 				}
 			}
-			if (labelColor != false) {
+			if (labelColor) {
 				var lColor = Plugin.prototype._getColorValue.apply(this, [labelColor]);
 				if (lColor) {
 					bi_label.css({'color':lColor});
@@ -223,16 +223,10 @@
 					for(n in posObj) {
 						switch (n) {
 							case 'top':
-								lb.css({'top':posObj[n]});
-								break;
 							case 'left':
-								lb.css({'left':posObj[n]});
-								break;
 							case 'bottom':
-								lb.css({'bottom':posObj[n]});
-								break;
 							case 'right':
-								lb.css({'right':posObj[n]});
+								lb.css({n:posObj[n]});
 								break;
 						}
 					}
@@ -245,7 +239,7 @@
 			
 			//If average (avgActive) is set to true, first calculate the average and then set the milestones
 			var avg = opt.avgActive;
-			if (avg == true) {
+			if (avg) {
 				var paramsAvg = {
 					that: that
 				}
@@ -262,7 +256,7 @@
 			}
 						
 			//Load bar -------------------------------------------------------------------------------------------------------- //			
-			if (opt.animation == true) {
+			if (opt.animation) {
 				var timeOut = opt.timeout;
 				var event = opt.triggerEvent;
 				var forceAnim = opt.forceAnim;
@@ -279,14 +273,14 @@
 					if (event == 'load') {
 						$(window).load(function() {
 							Plugin.prototype._animateBar.apply(this, [paramsAnim]);
-							if (opt.labelNumCount == true) {
+							if (opt.labelNumCount) {
 								Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
 							}
 						});
 					} else {
 						$(document).on(event, function() {
 							Plugin.prototype._animateBar.apply(this, [paramsAnim]);
-							if (opt.labelNumCount == true) {
+							if (opt.labelNumCount) {
 								Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
 							}
 						});
@@ -294,14 +288,14 @@
 				} else {
 					setTimeout(function() {
 						Plugin.prototype._animateBar.apply(this, [paramsAnim]);
-						if (opt.labelNumCount == true) {
+						if (opt.labelNumCount) {
 							Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
 						}
 					},forceDelay);					
 				}
 			} else {
 				var style = opt.style;
-				if (style == 'vartical') {
+				if (style == 'vertical') {
 					bi_bar.css({'height': barLength});
 				} else if (style == 'horizontal') {
 					bi_bar.css({'width': barLength});
@@ -318,7 +312,7 @@
 				var nArr = [];
 				$('.' + wrpClass).each(function() {
 					var dn = $(this).attr('data-biID');
-					if (dn && dn != '') {
+					if (dn) {
 						var n = parseInt(dn.replace('bi_', ''));
 						nArr.push(n);
 					}
@@ -363,10 +357,11 @@
 				var $el = that.$el;
 				var bar = $el.find('.bi-barInner');
 				var opt = that.opt;	
-				if (bar.attr('style')) {
-					bar.attr('style', bar.attr('style').replace('background-color', ''));
+				var barstyle = bar.attr('style');
+				if (barstyle) {
+					bar.attr('style', barstyle.replace('background-color', ''));
 				}
-				if (opt.colorRange == true) {				
+				if (opt.colorRange) {
 					var limObj = opt.colorRangeLimits;					
 					var allRangeClasses = '';
 					for (l in limObj) {						
@@ -392,7 +387,7 @@
 			}
 		},
 				
-		_animateBar: function(par) {	
+		_animateBar: function(par) {
 			if (par) {
 				var that = par.that;
 				var $el = that.$el;
@@ -406,46 +401,46 @@
 				var bl = par.bl;
 				setTimeout(function() {
 					if (style == 'vertical') {
-						if (par.reanim == true) { 
+						if (par.reanim) {
 							bar.css({'height':0}); 
 						}
 						bar.animate({'height':bl},at,eas).queue(function() {
 							$(document).trigger('bi.animationCompleted');
-							if ($elID && $elID != '') {
+							if ($elID) {
 								$(document).trigger('bi_' + $elID + '.animationCompleted');
 							}
-							if (par.reanim == true) { 
+							if (par.reanim) {
 								$(document).trigger('bi.reanimateBarStop'); 
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.reanimateBarStop');
 								}
 							}
-							if (par.loadData == true) { 
+							if (par.loadData) {
 								$(document).trigger('bi.loadDataStop');
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.loadDataStop');
 								}
 							}
 							$(this).dequeue();
 						});
 					} else if (style == 'horizontal') {
-						if (par.reanim == true) { 
+						if (par.reanim) {
 							bar.css({'width':0}); 
 						}
 						bar.animate({'width':bl},at,eas).queue(function() {
 							$(document).trigger('bi.animationCompleted');
-							if ($elID && $elID != '') {
+							if ($elID) {
 								$(document).trigger('bi_' + $elID + '.animationCompleted');
 							}
-							if (par.reanim == true) { 
+							if (par.reanim) {
 								$(document).trigger('bi.reanimateBarStop'); 
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.reanimateBarStop');
 								}
 							}
-							if (par.loadData == true) { 
+							if (par.loadData) {
 								$(document).trigger('bi.loadDataStop'); 
-								if ($elID && $elID != '') {
+								if ($elID) {
 									$(document).trigger('bi_' + $elID + '.loadDataStop');
 								}
 							}
@@ -481,12 +476,8 @@
 				function counter() {
 					setTimeout(function() {
 						label.html(i.toFixed(decim) + sign);					
-						if (i<target) {						
-							if ((target - i) > step) {
-								i+= step;
-							} else {
-								i = target;
-							}						
+						if (i<target) {
+							i = Math.min(i + step, target);
 							counter();
 						} else {
 							if (limLabelPos == 'num') { 
@@ -497,8 +488,6 @@
 									var cntrLb = '';
 								}
 								label.html(label.html() + cntrLb);
-							} else {
-								label.html(label.html());
 							}
 						}
 					},ct);				
@@ -537,11 +526,8 @@
 				var style = opt.style;
 				var mlst = opt.milestones;
 				var slf = par.self; 
-				if (slf) {
-					var barWrp = slf.find('.bi-bar');
-				} else {
-					var barWrp = $el.find('.bi-bar');
-				}
+				var barWrp = (slf || $el).find('.bi-bar');
+
 				//Append milestones
 				if (par.mlstObj) {
 					mlst = par.mlstObj;
@@ -562,7 +548,7 @@
 						num: pos
 					}
 					var mlstLb = mlstLabel;
-					if (opt.avgLabelNum == true) {
+					if (opt.avgLabelNum) {
 						if (mlstObj.mlClass == 'bi-average-mlst') {							
 							mlstLb = mlstLabel + ' ' + mlstObj.mlPos;
 							if (opt.numType == 'percent') {
@@ -579,16 +565,13 @@
 					barWrp.append(ml);
 					var $ml = barWrp.find('.bi-mlst_' + m);
 					$(document).trigger('bi.milestoneAppended', [$ml]);
-					if ($elID && $elID != '') {
+					if ($elID) {
 						$(document).trigger('bi_' + $elID + '_' + mlstId + '.milestoneAppended');
 					}
 				}
 				//Give position and (if true)dimensions
-				if (slf) {
-					var thisEl = slf;
-				} else {
-					var thisEl = $el;
-				}
+				var thisEl = (slf || $el);
+
 				thisEl.find('.bi-milestone').each(function() {
 					var ml = $(this);
 					var mlId = ml.attr('data-id');
@@ -638,8 +621,8 @@
 					} else if (mlVis == 'hidden') {
 						mlInner.addClass('bi-mlst-innerHidden').removeClass('bi-mlst-innerVisible bi-mlst-innerHover');
 					}
-					//If mlDim != false -> apply the given dimensions
-					if (mlDim != false) {
+					//If mlDim -> apply the given dimensions
+					if (mlDim) {
 						if (mlDim == 'inherit') {
 							var d = '100%';
 						} else if (mlDim.indexOf('%') != -1 || mlDim.indexOf('px') != -1) {
@@ -690,7 +673,7 @@
 					var notInitCount = 0;
 					elem.each(function() {	
 						var notInit = !$.data(this, 'plugin_' + pluginName);
-						if (notInit == true) {
+						if (notInit) {
 							notInitCount++;
 						}
 					});
@@ -704,23 +687,23 @@
 								var lbNum = parseFloat(that.attr('data-lbNum'));
 								that.addClass('bi-avgCalculated');							
 								sum += lbNum;
-								i++;	
+								i++;
 								numArr.push(lbNum);
 							}
 						});
 						var avg = sum / (i - 1);
-						if (lim == true) {
+						if (lim) {
 							var numArrSorted = numArr.sort(function(a,b) { return a-b });
 							var numArrMin = numArrSorted[0];
 							var	numArrMax = numArrSorted[numArrSorted.length - 1];
 							elem.each(function() {
 								var self = $(this);
-								if (self.attr('data-lbNum').indexOf(numArrMin) != -1 && limMinVisible == true) {									
+								if (self.attr('data-lbNum').indexOf(numArrMin) != -1 && limMinVisible) {
 									self.addClass('bi-lbNum-min').find('.bi-limSpan').html(limMinLabel).addClass('bi-limSpan-min');
-								} 
-								if (self.attr('data-lbNum').indexOf(numArrMax) != -1 && limMaxVisible == true) {
+								}
+								if (self.attr('data-lbNum').indexOf(numArrMax) != -1 && limMaxVisible) {
 									self.addClass('bi-lbNum-max').find('.bi-limSpan').html(limMaxLabel).addClass('bi-limSpan-max');									
-								}	
+								}
 								if (limLabelPos == 'num') {
 									elem.addClass('bi-limPos-num');
 								} else if (limLabelPos == 'title') {
@@ -764,18 +747,18 @@
 						}
 					};
 					var mlstObj = $.extend({}, mlst, avgObj);
-					if (avgColorIndicator == true) {
+					if (avgColorIndicator) {
 						var innerBar = $el.find('.bi-barInner');
 						var lbNum = $el.attr('data-lbnum');						
 						if (parseFloat(lbNum) > avg) {
 							$el.addClass('bi-avgAbove');
-							if (avgColorAboveAvg != false) {
+							if (avgColorAboveAvg) {
 								var colAbove = Plugin.prototype._getColorValue.apply(this, [avgColorAboveAvg]);
 								innerBar.css({'background-color':colAbove});
 							}
 						} else {
 							$el.addClass('bi-avgBelow');
-							if (avgColorBelowAvg != false) {
+							if (avgColorBelowAvg) {
 								var colBelow = Plugin.prototype._getColorValue.apply(this, [avgColorBelowAvg]);
 								innerBar.css({'background-color':colBelow});
 							}
@@ -828,12 +811,12 @@
 				target: num
 			}
 			Plugin.prototype._animateBar.apply(this, [paramsAnim]);
-			if (opt.labelNumCount == true) {
+			if (opt.labelNumCount) {
 				Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
 			}
 			//Trigger event
 			$(document).trigger('bi.reanimateBarStart');
-			if ($elID && $elID != '') {
+			if ($elID) {
 				$(document).trigger('bi_' + $elID + '.reanimateBarStart');
 			}
 		},
@@ -868,12 +851,12 @@
 					target: lbNum
 				}	
 				Plugin.prototype._animateBar.apply(this, [paramsAnim]);
-				if (this.opt.labelNumCount == true) {
+				if (this.opt.labelNumCount) {
 					Plugin.prototype._labelNumCounter.apply(this, [paramsCount]);
 				}
 				//Trigger event
 				$(document).trigger('bi.loadDataStart');
-				if ($elID && $elID != '') {
+				if ($elID) {
 					$(document).trigger('bi_' + $elID + '.loadDataStart');
 				}
 				//Change plugin stored data
