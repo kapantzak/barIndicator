@@ -621,6 +621,20 @@
 					} else if (mlVis == 'hidden') {
 						mlInner.addClass('bi-mlst-innerHidden').removeClass('bi-mlst-innerVisible bi-mlst-innerHover');
 					}
+                    if (mlVis == 'hover') {
+                        mlInner.on({
+                            'mouseenter': function() {                                
+                                $(this).addClass('bi-mlst-innerOverflowVisible');                             
+                            },
+                            'mouseleave': function() {                                
+                                setTimeout(function() {
+                                    $('.bi-mlst-inner').removeClass('bi-mlst-innerOverflowVisible');                                
+                                }, 150);
+                            }
+                        });
+                    } else {
+                        $(document).off('mouseenter mouseleave', '.bi-mlst-inner');
+                    }
 					//If mlDim -> apply the given dimensions
 					if (mlDim) {
 						if (mlDim == 'inherit') {
