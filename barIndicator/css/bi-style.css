@@ -122,8 +122,11 @@
 	height:100%;
 	float:left;
 	position:relative;
-	background-color:transparent;
+	background-color:transparent;    
 }
+.bi-mlst-inner.bi-mlst-innerHover { overflow: hidden }
+.bi-mlst-inner.bi-mlst-innerHover.bi-mlst-innerOverflowVisible { overflow: visible }
+
 .bi-mlst-innerLine,
 .bi-mlst-label {
 	display:inline-block;
