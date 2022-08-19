@@ -207,7 +207,7 @@ Change the color of the **label** by passing a valid string that represents a co
 Change the visibility of the label by passing one of the following values:
 
 - `default`: always visible label
-- `hover`: the label fades in on bar hover
+- [`hover`](https://www.scaler.com/topics/hover-css/): the label fades in on bar hover
 - `hidden`: always hidden
 
 
